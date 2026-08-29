@@ -11,6 +11,9 @@ import {
 import { DerivedMarketScoreSchema, DLDTransactionRecordSchema } from '../schemas/marketSchema';
 import { EOIFormSchema } from '../schemas/formSchema';
 import { AIAdvisorResponseSchema } from '../schemas/aiSchema';
+import { NewsItemSchema, NewsCategorySchema } from '../schemas/newsSchema';
+import { AdvisorProfileSchema, ConsultationBookingSchema } from '../schemas/advisorSchema';
+import type { DataFreshnessStatus, DataSourceMeta } from '../config/dataSources';
 
 export type Property = z.infer<typeof PropertySchema>;
 export type Developer = z.infer<typeof DeveloperSchema>;
@@ -25,6 +28,11 @@ export type DLDTransactionRecord = z.infer<typeof DLDTransactionRecordSchema>;
 
 export type EOIForm = z.infer<typeof EOIFormSchema>;
 export type AIAdvisorResponse = z.infer<typeof AIAdvisorResponseSchema>;
+
+export type NewsItem = z.infer<typeof NewsItemSchema>;
+export type NewsCategory = z.infer<typeof NewsCategorySchema>;
+export type AdvisorProfile = z.infer<typeof AdvisorProfileSchema>;
+export type ConsultationBooking = z.infer<typeof ConsultationBookingSchema>;
 
 export type CurrencyCode = 'AED' | 'INR' | 'USD' | 'EUR' | 'GBP' | 'SAR';
 
@@ -45,8 +53,20 @@ export interface CurrencyData {
 export interface TelemetryMetadata {
   source: string;
   lastUpdated: string;
-  dataStatus: string;
+  dataStatus: DataFreshnessStatus;
   confidenceScore?: number;
+  attributionLink?: string;
+}
+
+export interface NormalizedRecord<T> {
+  id: string;
+  sourceMeta: DataSourceMeta;
+  fetchedAt: string;
+  lastUpdated: string;
+  dataStatus: DataFreshnessStatus;
+  confidence?: number;
+  data: T;
+  attribution: string;
 }
 
 export interface AreaSentiment {
@@ -54,6 +74,7 @@ export interface AreaSentiment {
   sentimentScore: number;
   status: 'Positive' | 'Neutral' | 'Negative';
   keyDriver: string;
+  avgPriceSqftAED: number;
 }
 
 export interface MarketMetrics {
@@ -90,4 +111,27 @@ export interface CalculationResult {
   projectedAppreciationAED: number;
   projectedTotalPortfolioValueAED: number;
   netROIPercent: number;
+}
+
+export interface MarketBriefReport {
+  title: string;
+  generatedAt: string;
+  dataStatus: DataFreshnessStatus;
+  marketPosition: string;
+  keyChanges: string[];
+  areasToWatch: { area: string; momentumScore: number; thesis: string }[];
+  dataEvidence: { metric: string; value: string; source: string }[];
+  investorTakeaway: string;
+  riskConsiderations: string[];
+  upcomingEvents: string[];
+  sourceRegister: string[];
+}
+
+export interface InvestorStrategyInput {
+  budgetAED: number;
+  investmentObjective: 'High Net Yield' | 'Capital Growth' | 'Balanced Portfolio' | 'Golden Visa Eligibility';
+  holdingPeriodYears: number;
+  preferredArea?: string;
+  financingPreference: 'Full Cash' | 'Developer Payment Schedule' | 'Mortgage';
+  riskTolerance: 'Conservative' | 'Moderate' | 'Aggressive';
 }

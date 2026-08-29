@@ -1,9 +1,11 @@
-import type { Property, Launch, CurrencyCode, ExchangeRates, MarketMetrics } from '../types';
+import type { Property, Launch, CurrencyCode, ExchangeRates, MarketMetrics, NewsItem } from '../types';
 import { formatConvertedPrice } from '../utils/currency';
 import { PropertyCard } from '../components/property/PropertyCard';
 import { ImageWithFallback } from '../components/shared/ImageWithFallback';
 import { AskAMAdvisor } from '../components/ai/AskAMAdvisor';
-import { whatsappService } from '../services/whatsappService';
+import { LivePulseTicker } from '../components/shared/LivePulseTicker';
+import { DataStatusBadge } from '../components/shared/DataStatusBadge';
+import { MarketNewsFeed } from '../components/news/MarketNewsFeed';
 import {
   TrendingUp,
   Sparkles,
@@ -11,11 +13,13 @@ import {
   Calculator,
   Compass,
   Radar,
+  UserCheck,
 } from 'lucide-react';
 
 interface Props {
   properties: Property[];
   launches: Launch[];
+  newsItems: NewsItem[];
   marketMetrics: MarketMetrics | null;
   selectedCurrency: CurrencyCode;
   rates: ExchangeRates;
@@ -28,6 +32,7 @@ interface Props {
 export const Home = ({
   properties,
   launches,
+  newsItems,
   marketMetrics,
   selectedCurrency,
   rates,
@@ -37,11 +42,13 @@ export const Home = ({
   onSelectTab,
 }: Props) => {
   const featuredProperties = properties.filter((p) => p.status === 'Featured' || p.status === 'Off-Plan').slice(0, 3);
-  const advisorUrl = whatsappService.getGeneralAdvisorUrl();
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
+    <div className="space-y-12 sm:space-y-20 pb-20">
       
+      {/* Data-Driven Live Pulse Activity Rail */}
+      <LivePulseTicker marketMetrics={marketMetrics} onSelectTab={onSelectTab} />
+
       {/* 1. Cinematic Luxury Hero Section */}
       <section className="relative bg-stone-950 text-white rounded-3xl overflow-hidden shadow-2xl border border-stone-850">
         <div className="absolute inset-0 z-0 opacity-45">
@@ -61,7 +68,7 @@ export const Home = ({
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif-luxury font-bold tracking-tight text-stone-100 leading-tight">
-            Curated Waterfront & Off-Plan Investment Dossiers
+            Curated Waterfront & Off-Plan Investment Intelligence
           </h1>
 
           <p className="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto font-light leading-relaxed">
@@ -74,17 +81,16 @@ export const Home = ({
               className="w-full sm:w-auto px-8 py-4 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
             >
               <Compass className="w-4 h-4" />
-              <span>Explore Opportunities</span>
+              <span>Explore Dossiers</span>
             </button>
 
-            <a
-              href={advisorUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => onSelectTab('advisor')}
               className="w-full sm:w-auto px-8 py-4 bg-stone-900/90 hover:bg-stone-850 text-stone-200 border border-stone-700 font-semibold text-xs rounded-xl backdrop-blur-md transition-all flex items-center justify-center gap-2"
             >
-              <span>Speak to an Advisor</span>
-            </a>
+              <UserCheck className="w-4 h-4 text-amber-400" />
+              <span>Senior Advisor Desk</span>
+            </button>
           </div>
         </div>
       </section>
@@ -103,12 +109,13 @@ export const Home = ({
               </div>
             </div>
             <div className="flex items-center gap-2 text-xs">
-              <span className="px-2.5 py-1 rounded-md bg-amber-100 text-amber-900 font-bold">
+              <DataStatusBadge
+                status={marketMetrics.metadata.dataStatus}
+                sourceName={marketMetrics.metadata.source}
+                lastUpdated={marketMetrics.metadata.lastUpdated}
+              />
+              <span className="px-2.5 py-1 rounded-md bg-amber-100 text-amber-900 font-bold text-[11px]">
                 {marketMetrics.marketOutlook} · Score {marketMetrics.overallScore}/100
-              </span>
-              <span className="text-stone-400">|</span>
-              <span className="text-stone-500 text-[11px]">
-                Updated: {marketMetrics.metadata.lastUpdated}
               </span>
             </div>
           </div>
@@ -127,8 +134,8 @@ export const Home = ({
               <span className="text-xl font-bold text-amber-800">{marketMetrics.rentalYieldAvg}% Net</span>
             </div>
             <div className="p-4 bg-stone-50 rounded-xl border border-stone-100">
-              <span className="text-[10px] text-stone-500 uppercase font-bold block">Golden Visa Rule</span>
-              <span className="text-xl font-bold text-stone-900">AED 2M+ Threshold</span>
+              <span className="text-[10px] text-stone-500 uppercase font-bold block">Golden Visa Threshold</span>
+              <span className="text-xl font-bold text-stone-900">AED 2M+ Minimum</span>
             </div>
           </div>
         </section>
@@ -150,7 +157,7 @@ export const Home = ({
             onClick={() => onSelectTab('explore')}
             className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-900"
           >
-            <span>View All ({properties.length})</span>
+            <span>View All Dossiers ({properties.length})</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
@@ -171,7 +178,12 @@ export const Home = ({
         </div>
       </section>
 
-      {/* 4. Upcoming Launch Radar */}
+      {/* 4. Real Dubai Property News Feed Section */}
+      <section>
+        <MarketNewsFeed newsItems={newsItems} />
+      </section>
+
+      {/* 5. Upcoming Launch Radar */}
       <section className="bg-stone-950 text-stone-100 rounded-3xl p-6 sm:p-10 space-y-6 border border-stone-850 shadow-xl">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -220,7 +232,7 @@ export const Home = ({
         </div>
       </section>
 
-      {/* 5. Investment Calculator CTA */}
+      {/* 6. Investment Calculator CTA */}
       <section className="dark-panel rounded-3xl p-8 sm:p-12 text-center space-y-6 relative overflow-hidden">
         <div className="max-w-2xl mx-auto space-y-4">
           <div className="w-12 h-12 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto border border-amber-500/20">
@@ -245,7 +257,7 @@ export const Home = ({
         </div>
       </section>
 
-      {/* 6. Ask AM AI Intelligence Advisor */}
+      {/* 7. Ask AM AI Intelligence Analyst */}
       <section>
         <AskAMAdvisor
           selectedCurrency={selectedCurrency}

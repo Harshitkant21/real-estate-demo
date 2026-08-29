@@ -23,7 +23,7 @@ export const APP_CONFIG: AppConfig = {
   defaultCurrency: 'AED',
   supportedCurrencies: ['AED', 'INR', 'USD', 'EUR', 'GBP', 'SAR'],
   exchangeRateApiUrl: 'https://open.er-api.com/v6/latest/AED',
-  nvidiaNimApiUrl: 'https://integrate.api.nvidia.com/v1/chat/completions',
+  nvidiaNimApiUrl: '/api/nvidia/v1/chat/completions',
   rateCacheDurationMs: 1000 * 60 * 60 * 12, // 12 Hours
   featureFlags: {
     enableLiveMarketApi: true,

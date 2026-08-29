@@ -1,4 +1,4 @@
-import { Home, Compass, TrendingUp, Calculator, Bookmark } from 'lucide-react';
+import { Compass, TrendingUp, FileText, Calculator, UserCheck } from 'lucide-react';
 
 interface Props {
   activeTab: string;
@@ -6,17 +6,17 @@ interface Props {
   savedCount: number;
 }
 
-export const MobileNav = ({ activeTab, onSelectTab, savedCount }: Props) => {
+export const MobileNav = ({ activeTab, onSelectTab }: Props) => {
   const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'explore', label: 'Properties', icon: Compass },
-    { id: 'trends', label: 'Trends', icon: TrendingUp },
+    { id: 'explore', label: 'Explore', icon: Compass },
+    { id: 'market', label: 'Market', icon: TrendingUp },
+    { id: 'brief', label: 'Brief', icon: FileText },
     { id: 'studio', label: 'Calculator', icon: Calculator },
-    { id: 'saved', label: 'Saved', icon: Bookmark, badge: savedCount },
+    { id: 'advisor', label: 'Advisor', icon: UserCheck },
   ];
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-t border-stone-850 text-stone-300 shadow-2xl px-2 py-1.5">
+    <nav className="xl:hidden fixed bottom-0 left-0 right-0 z-50 bg-stone-950/95 backdrop-blur-md border-t border-stone-850 text-stone-300 shadow-2xl px-2 py-1.5">
       <div className="flex items-center justify-around">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -33,11 +33,6 @@ export const MobileNav = ({ activeTab, onSelectTab, savedCount }: Props) => {
             >
               <Icon className={`w-5 h-5 mb-1 ${isActive ? 'text-amber-400 scale-110' : 'text-stone-400'}`} />
               <span className="text-[10px] tracking-tight">{item.label}</span>
-              {item.badge !== undefined && item.badge > 0 && (
-                <span className="absolute top-0 right-2 w-3.5 h-3.5 rounded-full bg-amber-600 text-white text-[9px] font-bold flex items-center justify-center">
-                  {item.badge}
-                </span>
-              )}
             </button>
           );
         })}

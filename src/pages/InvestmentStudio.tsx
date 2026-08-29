@@ -104,7 +104,7 @@ export const InvestmentStudio = ({
               type="range"
               min={1000000}
               max={30000000}
-              step={250000}
+              step={500000}
               value={propertyPriceAED}
               onChange={(e) => setPropertyPriceAED(Number(e.target.value))}
               className="w-full accent-amber-700 cursor-pointer"
@@ -125,7 +125,7 @@ export const InvestmentStudio = ({
               type="range"
               min={4.0}
               max={10.0}
-              step={0.1}
+              step={0.5}
               value={rentalYieldPercent}
               onChange={(e) => setRentalYieldPercent(Number(e.target.value))}
               className="w-full accent-amber-700 cursor-pointer"

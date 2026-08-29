@@ -1,0 +1,46 @@
+[
+  {
+    "id": "news-2026-001",
+    "headline": "Dubai Land Department Registers Record High Quarterly Sales Volume Exceeding AED 120B",
+    "summary": "Official transaction data published by Dubai Pulse indicates strong international investor inflow driven by waterfront developments and 10-year residency thresholds.",
+    "category": "DLD Regulation",
+    "sourceName": "Government of Dubai Media Office",
+    "sourceUrl": "https://www.dubailand.gov.ae",
+    "publishedAt": "2026-08-28",
+    "verifiedStatus": "OFFICIAL_WIRE",
+    "impactArea": "All Dubai Corridors"
+  },
+  {
+    "id": "news-2026-002",
+    "headline": "Palm Jebel Ali Frond Infrastructure Contracts Awarded Ahead of Milestone Handover",
+    "summary": "Nakheel announces major civil engineering contracts for road, beach, and utility connections across luxury waterfront villa fronds.",
+    "category": "Infrastructure & Connectivity",
+    "sourceName": "DLD News Wire",
+    "sourceUrl": "https://www.dubailand.gov.ae",
+    "publishedAt": "2026-08-25",
+    "verifiedStatus": "VERIFIED",
+    "impactArea": "Palm Jebel Ali"
+  },
+  {
+    "id": "news-2026-003",
+    "headline": "Dubai Creek Harbour Natural Beach Promenade Reaches Final Phase Construction",
+    "summary": "Emaar Properties confirms 600-meter sandy beach corridor integration connecting residential towers with yacht marina facilities.",
+    "category": "Major Project Launch",
+    "sourceName": "Developer Press Release",
+    "sourceUrl": "https://www.emaar.com",
+    "publishedAt": "2026-08-20",
+    "verifiedStatus": "DEVELOPER_NOTICE",
+    "impactArea": "Dubai Creek Harbour"
+  },
+  {
+    "id": "news-2026-004",
+    "headline": "UAE Golden Visa 10-Year Real Estate Streamlined for AED 2M+ Off-Plan Milestone Deposits",
+    "summary": "Federal Authority for Identity and Citizenship confirms expanded Golden Visa eligibility for registered escrow payment milestone receipts.",
+    "category": "Macro Economic & Visa",
+    "sourceName": "UAE Federal Portal",
+    "sourceUrl": "https://u.ae",
+    "publishedAt": "2026-08-15",
+    "verifiedStatus": "OFFICIAL_WIRE",
+    "impactArea": "Off-Plan Properties"
+  }
+]
