@@ -1,0 +1,82 @@
+[
+  {
+    "id": "launch-101",
+    "name": "Bayline & Wavefront Residences",
+    "developer": "Emaar Properties",
+    "area": "Rashid Yachts & Marina",
+    "launchDate": "2026-09-12",
+    "timeframe": "Next 30 Days",
+    "startingPrice": 2100000,
+    "paymentPlan": "90/10",
+    "handover": "Q3 2028",
+    "propertyType": "Waterfront Apartment",
+    "expectedYield": 7.2,
+    "status": "VIP Registration Open",
+    "highlights": [
+      "500-berth mega yacht marina access",
+      "Direct boardwalk to heritage district",
+      "Interconnected lush garden plazas"
+    ],
+    "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "id": "launch-102",
+    "name": "Palm Beach Towers 3",
+    "developer": "Nakheel",
+    "area": "Palm Jumeirah Gateway",
+    "launchDate": "2026-10-05",
+    "timeframe": "Next 90 Days",
+    "startingPrice": 3800000,
+    "paymentPlan": "60/40",
+    "handover": "Q1 2029",
+    "propertyType": "Branded Residence",
+    "expectedYield": 6.9,
+    "status": "Expression of Interest",
+    "highlights": [
+      "360-degree Arabian Gulf and Palm views",
+      "Monorail connectivity directly inside building",
+      "Private beach club access"
+    ],
+    "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "id": "launch-103",
+    "name": "Vela Heights by Omniyat",
+    "developer": "Omniyat",
+    "area": "Marasi Bay",
+    "launchDate": "2026-11-20",
+    "timeframe": "Next Quarter",
+    "startingPrice": 12500000,
+    "paymentPlan": "50/50",
+    "handover": "Q4 2028",
+    "propertyType": "Sky Mansion",
+    "expectedYield": 7.5,
+    "status": "Private Advisory Launch",
+    "highlights": [
+      "Architecture by Foster + Partners",
+      "Managed by Dorchester Collection",
+      "Private plunge pool on every terrace"
+    ],
+    "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    "id": "launch-104",
+    "name": "Sobha Siniya Island Beach Villas",
+    "developer": "Sobha Realty",
+    "area": "Siniya Island",
+    "launchDate": "2026-09-28",
+    "timeframe": "Next 30 Days",
+    "startingPrice": 10500000,
+    "paymentPlan": "60/40",
+    "handover": "Q4 2028",
+    "propertyType": "Private Island Villa",
+    "expectedYield": 8.0,
+    "status": "Priority Booking",
+    "highlights": [
+      "Natural pristine eco-island setting",
+      "18-hole eco golf course on island",
+      "Helipad and private yacht slip"
+    ],
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+  }
+]

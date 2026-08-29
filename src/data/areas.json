@@ -1,0 +1,77 @@
+[
+  {
+    "id": "area-downtown",
+    "name": "Downtown Dubai",
+    "category": "Urban Core",
+    "avgPriceSqft": 2450,
+    "avgYield": 6.8,
+    "yoyAppreciation": 14.5,
+    "keyDrivers": [
+      "Burj Khalifa & Dubai Mall epicenter",
+      "High holiday home short-term yields",
+      "Global brand prestige"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
+    "totalTransactions": "AED 18.4B (2025/26)"
+  },
+  {
+    "id": "area-palm",
+    "name": "Palm Jumeirah",
+    "category": "Ultra-Luxury Waterfront",
+    "avgPriceSqft": 3600,
+    "avgYield": 7.2,
+    "yoyAppreciation": 21.8,
+    "keyDrivers": [
+      "World's premier man-made luxury island",
+      "UHNI trophy asset concentration",
+      "Zero remaining vacant land supply"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    "totalTransactions": "AED 24.2B (2025/26)"
+  },
+  {
+    "id": "area-creek",
+    "name": "Dubai Creek Harbour",
+    "category": "Emerging Mega-Hub",
+    "avgPriceSqft": 1850,
+    "avgYield": 7.4,
+    "yoyAppreciation": 18.2,
+    "keyDrivers": [
+      "Emaar's flagship future master plan",
+      "600m natural beach corridor",
+      "High capital growth runway"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+    "totalTransactions": "AED 12.8B (2025/26)"
+  },
+  {
+    "id": "area-hills",
+    "name": "Dubai Hills Estate",
+    "category": "Family Villa Sanctuary",
+    "avgPriceSqft": 1650,
+    "avgYield": 6.5,
+    "yoyAppreciation": 19.4,
+    "keyDrivers": [
+      "Centrally located championship golf course",
+      "King's College Hospital & top international schools",
+      "Surging European family expat migration"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+    "totalTransactions": "AED 15.6B (2025/26)"
+  },
+  {
+    "id": "area-jebelali",
+    "name": "Palm Jebel Ali",
+    "category": "Generational Waterfront",
+    "avgPriceSqft": 2800,
+    "avgYield": 7.8,
+    "yoyAppreciation": 28.0,
+    "keyDrivers": [
+      "110km of new beaches twice size of Palm Jumeirah",
+      "Early-stage master plan entry prices",
+      "D33 Dubai economic agenda alignment"
+    ],
+    "heroImage": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+    "totalTransactions": "AED 9.5B (2025/26)"
+  }
+]

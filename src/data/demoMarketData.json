@@ -1,0 +1,67 @@
+{
+  "metadata": {
+    "source": "AM Estates Dubai Real Estate Intelligence Engine (Prototype Telemetry)",
+    "lastUpdated": "August 2026",
+    "dataStatus": "Sample Intelligence / Demo Data",
+    "confidenceScore": 88
+  },
+  "overallScore": 74,
+  "marketOutlook": "Positive",
+  "priceMomentumPercent": 14.2,
+  "transactionVolumeYoY": 28.5,
+  "rentalYieldAvg": 7.1,
+  "supplyPressureScore": 42,
+  "areaSentiments": [
+    {
+      "areaName": "Palm Jebel Ali",
+      "sentimentScore": 92,
+      "status": "Positive",
+      "keyDriver": "Surging international UHNWI beach villa demand"
+    },
+    {
+      "areaName": "Dubai Creek Harbour",
+      "sentimentScore": 86,
+      "status": "Positive",
+      "keyDriver": "Strong capital growth trajectory and rental yield absorption"
+    },
+    {
+      "areaName": "Palm Jumeirah",
+      "sentimentScore": 84,
+      "status": "Positive",
+      "keyDriver": "Extreme scarcity of beachfront inventory driving price records"
+    },
+    {
+      "areaName": "Dubai Hills Estate",
+      "sentimentScore": 79,
+      "status": "Positive",
+      "keyDriver": "High family expat relocation influx"
+    },
+    {
+      "areaName": "Downtown Dubai",
+      "sentimentScore": 71,
+      "status": "Neutral",
+      "keyDriver": "Mature pricing plateau with high short-term rental yields"
+    },
+    {
+      "areaName": "Business Bay",
+      "sentimentScore": 68,
+      "status": "Neutral",
+      "keyDriver": "Balanced supply absorption with strong commercial tenant base"
+    }
+  ],
+  "sentimentDrivers": [
+    "Continued international wealth migration into Dubai real estate",
+    "UAE Golden Visa 10-year residency thresholds encouraging long-term holdings",
+    "Favorable 0% property capital gains & rental income tax regime",
+    "RERA regulatory escrow protections enhancing buyer confidence",
+    "High waterfront and prime villa inventory demand outpacing delivery timelines"
+  ],
+  "historicalYieldsByArea": [
+    { "area": "Dubai Creek Harbour", "yieldPercent": 7.4, "priceSqft": 1850 },
+    { "area": "Business Bay", "yieldPercent": 7.5, "priceSqft": 1950 },
+    { "area": "Palm Jumeirah", "yieldPercent": 7.2, "priceSqft": 3600 },
+    { "area": "Downtown Dubai", "yieldPercent": 6.8, "priceSqft": 2450 },
+    { "area": "Dubai Hills Estate", "yieldPercent": 6.5, "priceSqft": 1650 },
+    { "area": "Palm Jebel Ali", "yieldPercent": 7.8, "priceSqft": 2800 }
+  ]
+}
