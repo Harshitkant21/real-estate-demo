@@ -41,7 +41,7 @@ export const APP_CONFIG: AppConfig = {
     title: 'Senior Dubai Real Estate & Private Wealth Advisor',
     networkAffiliation: 'LICENSED BROKERAGE PARTNER NETWORK',
     whatsApp: rawWhatsapp,
-    photoUrl: 'src/assets/advisory_img.jpeg',
+    photoUrl: 'https://res.cloudinary.com/j7klg679/image/upload/v1788087252/183833ac-6fdb-4aa6-956a-50fc328877d1.jpg',
   },
   aiProvider: import.meta.env.VITE_AI_PROVIDER || 'nvidia',
   aiModel: import.meta.env.VITE_AI_MODEL || 'meta/llama-3.1-8b-instruct',
