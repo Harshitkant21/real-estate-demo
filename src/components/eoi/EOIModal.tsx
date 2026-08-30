@@ -316,7 +316,7 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={onClose}
-                    className="py-2 px-3 bg-red-700 hover:bg-red-800 text-white font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 transition-colors text-center"
+                    className="hidden sm:flex py-2 px-3 bg-red-700 hover:bg-red-800 text-white font-semibold text-[11px] rounded-xl items-center justify-center gap-1.5 transition-colors text-center"
                   >
                     <span>Open Gmail Web (Desktop)</span>
                   </a>
@@ -328,7 +328,7 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                       navigator.clipboard.writeText(textToCopy);
                       alert(`EOI Summary copied to clipboard!\nSend directly to: ${APP_CONFIG.companyDetails.email}`);
                     }}
-                    className="py-2 px-3 bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-200 transition-colors"
+                    className="py-2.5 sm:py-2 px-3 bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-200 transition-colors w-full"
                   >
                     <span>Copy Email & Details</span>
                   </button>
