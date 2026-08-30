@@ -64,7 +64,8 @@ export const Home = ({
         <div className="relative z-20 max-w-4xl mx-auto px-6 py-20 sm:py-28 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/90 border border-amber-500/30 text-amber-400 text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>MITTALCO · Dubai Real Estate Intelligence</span>
+            <span>MITTAL & CO. · Dubai Real Estate Intelligence</span>
+
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-serif-luxury font-bold tracking-tight text-stone-100 leading-tight">

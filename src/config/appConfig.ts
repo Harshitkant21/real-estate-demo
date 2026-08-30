@@ -25,11 +25,13 @@ export interface AppConfig {
   rateCacheDurationMs: number;
 }
 
+const rawWhatsapp = (import.meta.env.VITE_ADVISOR_WHATSAPP || '971501234567').toString().replace(/\D/g, '');
+
 export const APP_CONFIG: AppConfig = {
-  appName: 'MITTALCO',
+  appName: 'MITTAL & CO.',
   tagline: 'Dubai real estate, intelligently invested.',
   companyDetails: {
-    legalName: 'MITTALCO Real Estate Advisory LLC',
+    legalName: 'MITTAL & CO. Real Estate Advisory LLC',
     officeAddress: 'Level 28, Boulevard Plaza Tower 1, Downtown Dubai, UAE',
     email: 'advisory@mittalco.com',
     phone: '+971 4 123 4567',
@@ -38,7 +40,7 @@ export const APP_CONFIG: AppConfig = {
     name: 'Alexander Wright',
     title: 'Senior Dubai Real Estate & Private Wealth Advisor',
     reraLicense: 'RERA Broker License #39281',
-    whatsApp: import.meta.env.VITE_ADVISOR_WHATSAPP || '971501234567',
+    whatsApp: rawWhatsapp,
     photoUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
   },
   aiProvider: import.meta.env.VITE_AI_PROVIDER || 'nvidia',
@@ -51,4 +53,3 @@ export const APP_CONFIG: AppConfig = {
   exchangeRateApiUrl: 'https://open.er-api.com/v6/latest/AED',
   rateCacheDurationMs: 1000 * 60 * 60 * 12, // 12 Hours
 };
-

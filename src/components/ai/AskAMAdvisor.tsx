@@ -48,7 +48,8 @@ export const AskAMAdvisor = ({ onSelectPropertyByName }: Props) => {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-serif-luxury font-bold text-2xl text-white">Mittalco Intelligence Analyst</h3>
+              <h3 className="font-serif-luxury font-bold text-2xl text-white">MITTAL & CO. Private Wealth Analyst</h3>
+
               <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-[10px] font-bold border border-amber-500/20">
                 AI Reasoning Engine
               </span>

@@ -239,7 +239,8 @@ export const SearchModal = ({
 
         {/* Footer */}
         <div className="p-4 border-t border-stone-800 bg-stone-950 text-stone-400 text-[10px] text-center font-mono">
-          MITTALCO Verified Data Search · Dubai Land Department Open Telemetry Connected
+          MITTAL & CO. Verified Data Search · Dubai Land Department Open Telemetry Connected
+
         </div>
 
       </div>

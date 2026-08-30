@@ -227,7 +227,8 @@ export const InvestmentStudio = ({
                 Discuss Your Investment Model with an Advisor
               </h4>
               <p className="text-xs text-stone-500">
-                Send your configured parameters directly to a MITTALCO Senior Advisor on WhatsApp.
+                Send your configured parameters directly to a MITTAL & CO. Senior Advisor on WhatsApp.
+
               </p>
             </div>
 

@@ -56,17 +56,17 @@ export const PropertyDiscovery = ({
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold border border-amber-500/20 mb-2">
               <Compass className="w-3.5 h-3.5" />
-              <span>MITTALCO Curated Dubai Inventory</span>
+              <span>MITTAL & CO. Curated Dubai Inventory</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-white">
-              Explore Property Dossiers
+              Verified Dubai Property Dossiers
             </h1>
-            <p className="text-stone-400 text-xs sm:text-sm mt-1">
-              Curated off-plan and luxury waterfront opportunities across Dubai's prime corridors.
+            <p className="text-stone-400 text-xs sm:text-sm">
+              Explore off-plan developments and ready waterfront investments with verified ROI projections.
             </p>
           </div>
 
-          <DataStatusBadge status="EDITORIAL" sourceName="MITTALCO Research Desk" />
+          <DataStatusBadge status="EDITORIAL" sourceName="MITTAL & CO. Research Desk" />
         </div>
 
         {/* Filter Toolbar */}

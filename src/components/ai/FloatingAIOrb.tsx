@@ -40,7 +40,7 @@ export const FloatingAIOrb = ({ properties, onSelectProperty }: Props) => {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 group flex items-center gap-3 px-4 py-3.5 bg-stone-950 text-white rounded-full shadow-2xl border border-amber-500/40 hover:border-amber-400 hover:scale-105 transition-all duration-300"
-        title="Open MITTALCO Intelligence Analyst"
+        title="Open MITTAL & CO. Intelligence Analyst"
       >
         <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/20 text-amber-400">
           <div className="absolute inset-0 rounded-full border border-amber-400/60 animate-ping opacity-30" />
@@ -48,7 +48,7 @@ export const FloatingAIOrb = ({ properties, onSelectProperty }: Props) => {
         </div>
 
         <div className="text-left font-serif-luxury tracking-wide">
-          <span className="text-xs font-bold text-amber-400 block leading-none">MITTALCO AI</span>
+          <span className="text-xs font-bold text-amber-400 block leading-none">MITTAL & CO. AI</span>
           <span className="text-[9px] text-stone-300 uppercase tracking-widest font-sans font-bold">
             Private Wealth Desk
           </span>
@@ -76,7 +76,7 @@ export const FloatingAIOrb = ({ properties, onSelectProperty }: Props) => {
                   </div>
                   <div>
                     <h3 className="font-serif-luxury font-bold text-2xl text-white tracking-tight">
-                      MITTALCO Private Wealth AI Desk
+                      MITTAL & CO. Private Wealth AI Desk
                     </h3>
                     <p className="text-xs text-stone-400">
                       Live Dubai real estate analyst powered by DLD transaction telemetry.

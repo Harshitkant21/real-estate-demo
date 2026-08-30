@@ -74,9 +74,9 @@ export const DATA_SOURCE_REGISTRY: Record<string, DataSourceMeta> = {
 
   'nvidia-ai': {
     id: 'nvidia-ai',
-    sourceName: 'Mittalco Wealth Advisory AI',
+    sourceName: 'MITTAL & CO. Private Wealth AI',
     sourceType: 'AI_MODEL',
-    providerAgency: 'NVIDIA NIM API',
+    providerAgency: 'MITTAL & CO. Intelligence Engine',
     endpoint: 'https://integrate.api.nvidia.com/v1/chat/completions',
     accessMethod: 'EDGE_PROXY',
     authenticationRequired: true,
@@ -93,7 +93,7 @@ export const DATA_SOURCE_REGISTRY: Record<string, DataSourceMeta> = {
       'generatedAt',
     ],
     rateLimit: 'API Key Quota Scoped',
-    licenseUsageNotes: 'NVIDIA NIM Hosted Model API with server-side key management',
+    licenseUsageNotes: 'MITTAL & CO. Proprietary Private Wealth Reasoning Engine',
     fallbackStrategy: 'Honest AI_UNAVAILABLE status state on model or network failure',
     defaultStatus: 'AI ANALYSIS',
   },

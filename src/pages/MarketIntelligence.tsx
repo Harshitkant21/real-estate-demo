@@ -84,7 +84,8 @@ export const MarketIntelligence = ({
             onClick={() => onSelectTab('brief')}
             className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs rounded-xl transition-colors flex items-center gap-2"
           >
-            <span>Read Mittalco Market Brief</span>
+            <span>Read MITTAL & CO. Market Brief</span>
+
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -102,7 +103,8 @@ export const MarketIntelligence = ({
             </h2>
           </div>
 
-          <DataStatusBadge status={sentiment.dataStatus} sourceName="MITTALCO Derived Scoring Engine" />
+          <DataStatusBadge status={sentiment.dataStatus} sourceName="MITTAL & CO. Derived Scoring Engine" />
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">

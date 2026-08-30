@@ -53,7 +53,8 @@ export const MarketBrief = ({ onSelectTab: _onSelectTab }: Props) => {
             </p>
           </div>
 
-          <DataStatusBadge status={brief.dataStatus} sourceName="MITTALCO Research Desk" lastUpdated={brief.generatedAt} />
+          <DataStatusBadge status={brief.dataStatus} sourceName="MITTAL & CO. Research Desk" lastUpdated={brief.generatedAt} />
+
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 text-xs pt-1">

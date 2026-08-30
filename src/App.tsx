@@ -373,7 +373,7 @@ export function App() {
 
 
               <p className="text-xs text-stone-400 max-w-sm leading-relaxed">
-                Dubai real estate, intelligently invested. MITTALCO provides official Dubai Land Department market intelligence, developer dossiers, and ROI modeling for international private wealth investors.
+                Dubai real estate, intelligently invested. MITTAL & CO. provides official Dubai Land Department market intelligence, developer dossiers, and ROI modeling for international private wealth investors.
               </p>
             </div>
 
@@ -385,7 +385,7 @@ export function App() {
                 <li><button onClick={() => { setSelectedProperty(null); setActiveTab('explore'); }} className="hover:text-white">Explore Properties</button></li>
                 <li><button onClick={() => { setSelectedProperty(null); setActiveTab('trends'); }} className="hover:text-white">Dubai Market Trends</button></li>
                 <li><button onClick={() => { setSelectedProperty(null); setActiveTab('market'); }} className="hover:text-white">Market Intelligence</button></li>
-                <li><button onClick={() => { setSelectedProperty(null); setActiveTab('brief'); }} className="hover:text-white">Mittalco Market Brief</button></li>
+                <li><button onClick={() => { setSelectedProperty(null); setActiveTab('brief'); }} className="hover:text-white">MITTAL & CO. Market Brief</button></li>
                 <li><button onClick={() => { setSelectedProperty(null); setActiveTab('advisor'); }} className="hover:text-white">Senior Advisor Desk</button></li>
               </ul>
             </div>
@@ -408,9 +408,9 @@ export function App() {
               Property information, yields, handover dates, and ROI projections are provided for general informational purposes and modeling only. All claims regarding 0% property tax, UAE Golden Visa 10-year residency, RERA escrow protections, and capital appreciation are subject to applicable UAE government regulations, DLD eligibility requirements, individual financial circumstances, and final legal approval. Projections are estimates and do not constitute guaranteed returns.
             </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2 border-t border-stone-850 text-stone-400">
-              <span>© 2026 MITTALCO. All rights reserved.</span>
+              <span>© 2026 MITTAL & CO. All rights reserved.</span>
               <a href={generalAdvisorUrl} target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline">
-                Talk to a MITTALCO Senior Advisor on WhatsApp →
+                Talk to a MITTAL & CO. Senior Advisor on WhatsApp →
               </a>
             </div>
           </div>

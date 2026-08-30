@@ -43,12 +43,12 @@ export class AIAdvisorService {
         marketView: 'Out-of-Domain Query Refusal',
         confidence: 100,
         summary:
-          'I am MITTALCO Intelligence, an analyst specialized exclusively in Dubai private wealth real estate acquisitions, DLD telemetry, and yield structuring. I cannot assist with non-property topics.',
-        drivers: ['MITTALCO Domain Boundary Guardrails'],
+          'I am MITTAL & CO. Private Wealth Analyst, specialized exclusively in Dubai private wealth real estate acquisitions, DLD telemetry, and yield structuring. I cannot assist with non-property topics.',
+        drivers: ['MITTAL & CO. Domain Boundary Guardrails'],
         risks: ['Queries unrelated to Dubai real estate are strictly refused'],
         recommendedAreas: [],
         recommendedProperties: [],
-        sources: ['MITTALCO Intelligence Policy'],
+        sources: ['MITTAL & CO. Intelligence Policy'],
         generatedAt: new Date().toISOString().split('T')[0],
       });
     }
@@ -68,7 +68,7 @@ export class AIAdvisorService {
     const recommendedAreas = Array.from(new Set((suitableProps.length > 0 ? suitableProps : liveProps).map((p) => p.area)));
 
     // 3. Build System Prompt with Live Property Finder Context
-    const systemPrompt = `You are MITTALCO Intelligence, an elite Dubai private wealth real estate analyst.
+    const systemPrompt = `You are MITTAL & CO. Private Wealth Analyst, an elite Dubai private wealth real estate advisor.
 Analyze the user's specific query: "${userPrompt}"
 - Property Finder Live Stream Status: ${propertiesRec.dataStatus}
 - DLD Market Telemetry Status: ${metricsRec.dataStatus}
@@ -88,7 +88,7 @@ Instructions:
   "risks": ["Risk factor 1", "Risk factor 2"],
   "recommendedAreas": ["Primary Area 1", "Primary Area 2"],
   "recommendedProperties": ["Property 1"],
-  "sources": ["Property Finder API via RapidAPI", "Dubai Land Department (DLD) Telemetry", "MITTALCO Advisory Desk"],
+  "sources": ["Property Finder API via RapidAPI", "Dubai Land Department (DLD) Telemetry", "MITTAL & CO. Advisory Desk"],
   "generatedAt": "${new Date().toISOString().split('T')[0]}"
 }`;
 
@@ -176,7 +176,7 @@ Instructions:
       risks,
       recommendedAreas: recommendedAreas.length > 0 ? recommendedAreas.slice(0, 3) : ['Palm Jumeirah', 'Dubai Hills Estate'],
       recommendedProperties: recommendedPropNames.length > 0 ? recommendedPropNames.slice(0, 2) : ['Dubai Property Dossier'],
-      sources: ['Property Finder API via RapidAPI', 'Dubai Land Department (DLD) Telemetry', 'MITTALCO Advisory Desk'],
+      sources: ['Property Finder API via RapidAPI', 'Dubai Land Department (DLD) Telemetry', 'MITTAL & CO. Advisory Desk'],
       generatedAt: new Date().toISOString().split('T')[0],
     });
   }

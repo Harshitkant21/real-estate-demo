@@ -54,7 +54,7 @@ export const PropertyDetail = ({
         </button>
 
         <div className="flex items-center gap-2">
-          <DataStatusBadge status="EDITORIAL" sourceName="MITTALCO Research Desk" />
+          <DataStatusBadge status="EDITORIAL" sourceName="MITTAL & CO. Research Desk" />
 
           <button
             onClick={() => onToggleSave(property.id)}
@@ -179,7 +179,8 @@ export const PropertyDetail = ({
           <div className="bg-stone-950 text-white rounded-2xl p-6 space-y-4 border border-stone-850 shadow-xl">
             <h3 className="font-serif-luxury font-bold text-lg text-white">Private Allocation Inquiry</h3>
             <p className="text-xs text-stone-400 leading-relaxed">
-              Submit an Expression of Interest (EOI) or speak directly with a MITTALCO Senior Advisor.
+              Submit an Expression of Interest (EOI) or speak directly with a MITTAL & CO. Senior Advisor.
+
             </p>
 
             <button
