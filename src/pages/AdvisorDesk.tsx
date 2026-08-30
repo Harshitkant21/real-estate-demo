@@ -238,7 +238,7 @@ export const AdvisorDesk = () => {
                     <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                     <h4 className="font-serif-luxury font-bold text-xl text-stone-900">Consultation Request Prepared</h4>
                     <p className="text-xs text-stone-600">
-                      Select your preferred channel below to send your booking request directly to Senior Advisor Alexander Wright.
+                      Select your preferred channel below to send your booking request directly to Senior Advisor Anmol Mittal.
                     </p>
                   </div>
 
@@ -248,13 +248,13 @@ export const AdvisorDesk = () => {
                     <p><strong>Email:</strong> {formData.email}</p>
                     <p><strong>Mobile:</strong> {formData.phone}</p>
                     <p><strong>Topic:</strong> {formData.consultationTopic}</p>
-                    <p><strong>Target Advisor:</strong> Alexander Wright ({APP_CONFIG.companyDetails.email})</p>
+                    <p><strong>Target Advisor:</strong> Anmol Mittal ({APP_CONFIG.companyDetails.email})</p>
                   </div>
 
                   {/* Multi-Channel Dispatch Buttons */}
                   <div className="space-y-2 pt-1">
                     <span className="text-[10px] font-bold text-stone-500 uppercase tracking-wider block text-center">
-                      Choose Your Preferred Channel Below
+                      Select Communication Channel Below
                     </span>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -270,36 +270,36 @@ export const AdvisorDesk = () => {
                       </a>
 
                       <a
-                        href={whatsappService.getConsultationGmailWebUrl(formData)}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={whatsappService.getConsultationEmailUrl(formData)}
                         onClick={() => setIsModalOpen(false)}
-                        className="py-2.5 px-3 bg-red-700 hover:bg-red-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
+                        className="py-2.5 px-3 bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
                       >
-                        <Mail className="w-4 h-4" />
-                        <span>Open Gmail Web</span>
+                        <Mail className="w-4 h-4 text-amber-400" />
+                        <span>Open Mobile / Email App</span>
                       </a>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                       <a
-                        href={whatsappService.getConsultationEmailUrl(formData)}
+                        href={whatsappService.getConsultationGmailWebUrl(formData)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onClick={() => setIsModalOpen(false)}
-                        className="py-2 px-3 bg-stone-900 hover:bg-stone-800 text-stone-200 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-800 transition-colors"
+                        className="py-2 px-3 bg-red-700 hover:bg-red-800 text-white font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 transition-colors"
                       >
-                        <span>Desktop Mail App (mailto)</span>
+                        <span>Open Gmail Web (Desktop)</span>
                       </a>
 
                       <button
                         type="button"
                         onClick={() => {
-                          const textToCopy = `Advisor: Alexander Wright (${APP_CONFIG.companyDetails.email})\nInvestor: ${formData.investorName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nTopic: ${formData.consultationTopic}`;
+                          const textToCopy = `Advisor: Anmol Mittal (${APP_CONFIG.companyDetails.email})\nInvestor: ${formData.investorName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nTopic: ${formData.consultationTopic}`;
                           navigator.clipboard.writeText(textToCopy);
-                          alert('Consultation request details copied to clipboard!');
+                          alert(`Consultation request details copied to clipboard!\nSend directly to: ${APP_CONFIG.companyDetails.email}`);
                         }}
                         className="py-2 px-3 bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-200 transition-colors"
                       >
-                        <span>Copy Summary to Clipboard</span>
+                        <span>Copy Email & Details</span>
                       </button>
                     </div>
                   </div>
@@ -310,7 +310,7 @@ export const AdvisorDesk = () => {
                     <label className="block font-semibold text-stone-700 mb-1">Investor Name *</label>
                     <input
                       type="text"
-                      placeholder="Alexander Wright"
+                      placeholder="e.g. Anmol Mittal"
                       value={formData.investorName}
                       onChange={(e) => {
                         const val = e.target.value;

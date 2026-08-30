@@ -3,7 +3,9 @@ import type { Property, CurrencyCode, ExchangeRates, EOIForm } from '../../types
 import { EOIFormSchema } from '../../schemas/formSchema';
 import { formatConvertedPrice } from '../../utils/currency';
 import { whatsappService } from '../../services/whatsappService';
+import { APP_CONFIG } from '../../config/appConfig';
 import { X, CheckCircle2, ShieldCheck, ArrowRight, MessageSquare, Building2, AlertCircle, Mail } from 'lucide-react';
+
 
 
 interface Props {
@@ -140,7 +142,8 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Alexander Wright"
+                  placeholder="e.g. Anmol Mittal"
+
                   value={formData.investorName}
                   onChange={(e) => {
                     const val = e.target.value;
@@ -282,7 +285,7 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
               {/* Multi-Channel Dispatch Buttons */}
               <div className="space-y-2 pt-1">
                 <span className="text-[10px] font-bold text-stone-500 uppercase tracking-wider block text-center">
-                  Choose Your Preferred Communication Channel
+                  Select Communication Channel Below
                 </span>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -298,36 +301,36 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                   </a>
 
                   <a
-                    href={whatsappService.getEoiGmailWebUrl(formData, formatted)}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={whatsappService.getEoiEmailUrl(formData, formatted)}
                     onClick={onClose}
-                    className="py-2.5 px-3 bg-red-700 hover:bg-red-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
+                    className="py-2.5 px-3 bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
                   >
-                    <Mail className="w-4 h-4" />
-                    <span>Open Gmail Web</span>
+                    <Mail className="w-4 h-4 text-amber-400" />
+                    <span>Open Mobile / Email App</span>
                   </a>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                   <a
-                    href={whatsappService.getEoiEmailUrl(formData, formatted)}
+                    href={whatsappService.getEoiGmailWebUrl(formData, formatted)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={onClose}
-                    className="py-2 px-3 bg-stone-900 hover:bg-stone-800 text-stone-200 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-800 transition-colors text-center"
+                    className="py-2 px-3 bg-red-700 hover:bg-red-800 text-white font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 transition-colors text-center"
                   >
-                    <span>Desktop Mail App (mailto)</span>
+                    <span>Open Gmail Web (Desktop)</span>
                   </a>
 
                   <button
                     type="button"
                     onClick={() => {
-                      const textToCopy = `EOI Submission for ${formData.propertyName}\nInvestor: ${formData.investorName} (${formData.country})\nEmail: ${formData.email}\nPhone: ${formData.phone}\nPreference: ${formData.financingPreference}\nBudget: ${formatted}`;
+                      const textToCopy = `EOI Submission for ${formData.propertyName}\nInvestor: ${formData.investorName} (${formData.country})\nEmail: ${formData.email}\nPhone: ${formData.phone}\nPreference: ${formData.financingPreference}\nBudget: ${formatted}\nSend to: ${APP_CONFIG.companyDetails.email}`;
                       navigator.clipboard.writeText(textToCopy);
-                      alert('EOI Summary copied to clipboard!');
+                      alert(`EOI Summary copied to clipboard!\nSend directly to: ${APP_CONFIG.companyDetails.email}`);
                     }}
                     className="py-2 px-3 bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-200 transition-colors"
                   >
-                    <span>Copy Summary to Clipboard</span>
+                    <span>Copy Email & Details</span>
                   </button>
                 </div>
               </div>
