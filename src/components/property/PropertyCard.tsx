@@ -34,7 +34,7 @@ export const PropertyCard: React.FC<Props> = ({
   onOpenStudio,
 }) => {
   const { formatted } = formatConvertedPrice(property.startingPrice, selectedCurrency, rates);
-  const whatsappUrl = whatsappService.getPropertyInquiryUrl(property, formatted);
+  const whatsappUrl = whatsappService.getPropertyInquiryUrl(property.name, formatted);
 
   return (
     <div className="luxury-card rounded-xl overflow-hidden flex flex-col group h-full">

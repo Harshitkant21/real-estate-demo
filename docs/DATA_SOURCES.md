@@ -1,6 +1,6 @@
-# AM Estates — Data Sources & Telemetry Catalog
+# MITTALCO — Data Sources & Telemetry Catalog
 
-This document details the origin, refresh policy, update frequency, licensing status, and fallback mechanics for all data streams used within the **AM Estates** platform.
+This document details the origin, refresh policy, update frequency, licensing status, and fallback mechanics for all data streams used within the **MITTALCO** platform.
 
 ---
 
@@ -14,7 +14,7 @@ This document details the origin, refresh policy, update frequency, licensing st
 | **Developer Profiles** | **Editorial Static** | `src/data/developers.json` | Build-time / Editorial | Static JSON fallback | None | `Editorial / Verified` |
 | **Launch Radar** | **Editorial Static** | `src/data/launches.json` | Build-time / Editorial | Static JSON fallback | None | `Editorial / Verified` |
 | **Derived Market Scoring** | **Derived Intelligence** | `src/services/marketMetricsEngine.ts` | Calculated On-demand | Deterministic weighted scoring algorithm | None | `Derived Score` |
-| **AM Intelligence Advisor** | **AI Interpretation** | `src/services/aiAdvisorService.ts` (NVIDIA NIM API) | Interactive On-demand | Contextual DLD summary with Zod validation | **Yes** (Server Proxy Only) | `NVIDIA NIM AI Reasoning` |
+| **Mittalco Intelligence Analyst** | **AI Interpretation** | `src/services/aiAdvisorService.ts` (NVIDIA NIM / Mistral API) | Interactive On-demand | Contextual DLD summary with Zod validation | **Yes** (Server Proxy Only) | `AI Reasoning` |
 
 ---
 
@@ -36,8 +36,8 @@ This document details the origin, refresh policy, update frequency, licensing st
 
 ---
 
-## 3. AI Reasoning Layer: NVIDIA NIM Proxy Service
+## 3. AI Reasoning Layer: Environment-Driven Provider Service
 
-- **Provider**: NVIDIA NIM Hosted APIs / `aiAdvisorService.ts`
-- **Security Boundary**: Client $\rightarrow$ Secure Edge Proxy $\rightarrow$ NVIDIA NIM Endpoint $\rightarrow$ Zod `AIAdvisorResponseSchema` Validation $\rightarrow$ UI.
-- **Domain Scoping Guardrail**: Scoped strictly to UAE/Dubai real estate, DLD telemetry, yield calculations, and AM Estates dossiers. Refuses out-of-domain queries.
+- **Providers**: NVIDIA NIM (`meta/llama-3.1-8b-instruct`) / Mistral AI APIs via `aiAdvisorService.ts`
+- **Security Boundary**: Client $\rightarrow$ Secure Edge Proxy $\rightarrow$ Provider Endpoint $\rightarrow$ Zod `AIAdvisorResponseSchema` Validation $\rightarrow$ UI.
+- **Domain Scoping Guardrail**: Scoped strictly to UAE/Dubai real estate, DLD telemetry, yield calculations, and MITTALCO dossiers. Refuses out-of-domain queries.

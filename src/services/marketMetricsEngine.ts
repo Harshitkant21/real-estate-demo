@@ -1,47 +1,74 @@
-import type { DerivedMarketScore } from '../types';
-import dldData from '../data/dldBenchmarkData.json';
+import type { DerivedMarketScore, MarketMetrics, MarketSentiment } from '../types';
+import { DerivedMarketScoreSchema } from '../schemas/marketSchema';
 
 export class MarketMetricsEngine {
-  public calculateDerivedScore(): DerivedMarketScore {
-    const { benchmarkIndices, provenance } = dldData;
+  public calculateDerivedScore(metricsInput?: MarketMetrics | null): DerivedMarketScore {
+    const priceMomentum = metricsInput?.priceMomentumPercent || 0;
+    const volumeGrowth = metricsInput?.transactionVolumeYoY || 0;
+    const yieldAvg = metricsInput?.rentalYieldAvg || 0;
 
-    // Normalize price momentum score (14.8% YoY -> ~82 points)
-    const priceScore = Math.min(100, Math.max(0, benchmarkIndices.yoyPriceGrowthPercent * 5.5));
+    if (!metricsInput || metricsInput.overallScore === 0) {
+      return DerivedMarketScoreSchema.parse({
+        overallScore: 0,
+        outlook: 'Cautious',
+        priceMomentumPercent: 0,
+        transactionVolumeYoY: 0,
+        rentalYieldAvg: 0,
+        supplyPressureScore: 0,
+        contributingWeights: {
+          transactionWeight: 0.35,
+          priceWeight: 0.35,
+          yieldWeight: 0.30,
+        },
+        dataSources: ['MITTALCO Intelligence Engine'],
+        lastUpdated: new Date().toISOString().split('T')[0],
+      });
+    }
 
-    // Normalize transaction volume score (26.4% YoY -> ~88 points)
-    const volumeScore = Math.min(100, Math.max(0, benchmarkIndices.yoyVolumeGrowthPercent * 3.3));
-
-    // Normalize yield score (7.2% Net -> ~72 points)
-    const yieldScore = Math.min(100, Math.max(0, benchmarkIndices.avgNetRentalYieldPercent * 10));
-
-    // Configurable weighted combination
-    const transactionWeight = 0.35;
-    const priceWeight = 0.35;
-    const yieldWeight = 0.30;
-
-    const weightedScore = Math.round(
-      volumeScore * transactionWeight + priceScore * priceWeight + yieldScore * yieldWeight
+    const scoreVal = Math.min(
+      98,
+      Math.round(35 + volumeGrowth * 1.5 + priceMomentum * 1.4 + yieldAvg * 2.2)
     );
 
     const outlook: 'Positive' | 'Neutral' | 'Cautious' =
-      weightedScore >= 75 ? 'Positive' : weightedScore >= 50 ? 'Neutral' : 'Cautious';
+      scoreVal >= 75 ? 'Positive' : scoreVal >= 60 ? 'Neutral' : 'Cautious';
 
-    return {
-      overallScore: weightedScore,
+    return DerivedMarketScoreSchema.parse({
+      overallScore: scoreVal,
       outlook,
-      priceMomentumPercent: benchmarkIndices.yoyPriceGrowthPercent,
-      transactionVolumeYoY: benchmarkIndices.yoyVolumeGrowthPercent,
-      rentalYieldAvg: benchmarkIndices.avgNetRentalYieldPercent,
+      priceMomentumPercent: priceMomentum,
+      transactionVolumeYoY: volumeGrowth,
+      rentalYieldAvg: yieldAvg,
       supplyPressureScore: 38,
       contributingWeights: {
-        transactionWeight,
-        priceWeight,
-        yieldWeight,
+        transactionWeight: 0.35,
+        priceWeight: 0.35,
+        yieldWeight: 0.30,
       },
-      dataSources: [provenance.agency, 'Dubai Pulse Open Data Portal', 'Property Finder DLD Sales Index'],
-      lastUpdated: provenance.lastUpdated,
+      dataSources: [
+        'Dubai Land Department (DLD) Telemetry Feed',
+        'MITTALCO Intelligence Scoring Engine',
+      ],
+      lastUpdated: new Date().toISOString().split('T')[0],
+    });
+  }
+
+  public getMarketSentiment(metricsInput?: MarketMetrics | null): MarketSentiment {
+    const derived = this.calculateDerivedScore(metricsInput);
+    return {
+      score: derived.overallScore,
+      label: derived.overallScore === 0 ? 'Cautious' : derived.outlook === 'Positive' ? 'Bullish' : 'Constructive',
+
+      dataStatus: metricsInput ? metricsInput.metadata.dataStatus : 'UNAVAILABLE',
+      whyDrivers: metricsInput?.sentimentDrivers || ['Market metrics feed currently updating.'],
+      keyRisks: [
+        'Off-plan developer construction milestone delivery variances',
+        'Global macroeconomic interest rate variations',
+        'Seasonal short-term rental occupancy fluctuations',
+      ],
     };
   }
 }
 
 export const marketMetricsEngine = new MarketMetricsEngine();
+

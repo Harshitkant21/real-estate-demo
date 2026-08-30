@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { AdvisorProfile, ConsultationBooking } from '../types';
 import { ConsultationBookingSchema } from '../schemas/advisorSchema';
-import rawAdvisor from '../data/advisorData.json';
+import { APP_CONFIG } from '../config/appConfig';
 import { ImageWithFallback } from '../components/shared/ImageWithFallback';
 import { whatsappService } from '../services/whatsappService';
 import {
@@ -17,8 +17,31 @@ import {
   X,
 } from 'lucide-react';
 
+const DEFAULT_ADVISOR: AdvisorProfile = {
+  id: 'adv-001',
+  name: APP_CONFIG.advisor.name,
+  title: APP_CONFIG.advisor.title,
+  reraLicenseNo: APP_CONFIG.advisor.reraLicense,
+  brokeragePartner: APP_CONFIG.companyDetails.legalName,
+  experienceYears: 12,
+  officeAddress: APP_CONFIG.companyDetails.officeAddress,
+  email: APP_CONFIG.companyDetails.email,
+  phoneWhatsApp: APP_CONFIG.companyDetails.phone,
+  photoUrl: APP_CONFIG.advisor.photoUrl,
+  bio: 'Senior Dubai Real Estate & Private Wealth Advisor specializing in prime waterfront acquisitions, off-plan developer allocation, and international portfolio structuring.',
+  specialization: [
+    'Prime Waterfront Acquisitions',
+    'Off-Plan Master Developer Priority Access',
+    'Golden Visa Equity Portfolio Structuring',
+    'ROI & Net Rental Yield Optimization',
+  ],
+  languages: ['English', 'Arabic', 'French'],
+};
+
+
 export const AdvisorDesk = () => {
-  const advisor: AdvisorProfile = rawAdvisor as AdvisorProfile;
+  const advisor: AdvisorProfile = DEFAULT_ADVISOR;
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);

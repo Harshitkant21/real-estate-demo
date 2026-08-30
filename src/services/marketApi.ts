@@ -1,15 +1,15 @@
 import type { MarketMetrics } from '../types';
-import demoMarketDataRaw from '../data/demoMarketData.json';
+import { fetchLiveMarketMetrics } from './liveDataServices';
 
 export interface MarketDataProvider {
-  getMarketMetrics(): Promise<MarketMetrics>;
+  getMarketMetrics(): Promise<MarketMetrics | null>;
 }
 
-export class DemoMarketDataProvider implements MarketDataProvider {
-  public async getMarketMetrics(): Promise<MarketMetrics> {
-    // Simulate lightweight async fetch
-    return demoMarketDataRaw as MarketMetrics;
+export class LiveMarketDataProvider implements MarketDataProvider {
+  public async getMarketMetrics(): Promise<MarketMetrics | null> {
+    const res = await fetchLiveMarketMetrics();
+    return res.data;
   }
 }
 
-export const marketService: MarketDataProvider = new DemoMarketDataProvider();
+export const marketService: MarketDataProvider = new LiveMarketDataProvider();

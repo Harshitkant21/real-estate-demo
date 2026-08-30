@@ -23,7 +23,7 @@ export const DerivedMarketScoreSchema = z.object({
   transactionVolumeYoY: z.number(),
   rentalYieldAvg: z.number(),
   supplyPressureScore: z.number(),
-  contributingWeights: ContributingWeightsSchema,
+  contributingWeights: ContributingWeightsSchema.optional(),
   dataSources: z.array(z.string()),
-  lastUpdated: z.string(),
+  lastUpdated: z.string().optional(),
 });

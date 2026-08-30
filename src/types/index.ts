@@ -59,15 +59,18 @@ export interface TelemetryMetadata {
 }
 
 export interface NormalizedRecord<T> {
-  id: string;
-  sourceMeta: DataSourceMeta;
-  fetchedAt: string;
-  lastUpdated: string;
+  id?: string;
+  sourceMeta?: DataSourceMeta;
+  fetchedAt?: string;
+  lastUpdated?: string;
+  lastVerifiedAt?: string;
+  provenanceNotes?: string;
   dataStatus: DataFreshnessStatus;
   confidence?: number;
   data: T;
-  attribution: string;
+  attribution?: string;
 }
+
 
 export interface AreaSentiment {
   areaName: string;
@@ -88,6 +91,35 @@ export interface MarketMetrics {
   areaSentiments: AreaSentiment[];
   sentimentDrivers: string[];
   historicalYieldsByArea: { area: string; yieldPercent: number; priceSqft: number }[];
+}
+
+export interface IntelligenceNotification {
+  id: string;
+  type: 'MARKET_MOVEMENT' | 'DLD_UPDATE' | 'NEW_LAUNCH' | 'REGULATORY_ANNOUNCEMENT' | 'FX_REFRESH';
+  title: string;
+  description: string;
+  timestamp: string;
+  source: string;
+  dataStatus: DataFreshnessStatus;
+  read: boolean;
+  linkTab?: string;
+}
+
+export interface MarketSentiment {
+  score: number; // 0 - 100
+  label: 'Bullish' | 'Constructive' | 'Neutral' | 'Cautious';
+  dataStatus: DataFreshnessStatus;
+  whyDrivers: string[];
+  keyRisks: string[];
+}
+
+export interface SourceRegisterItem {
+  datasetName: string;
+  providerAgency: string;
+  endpoint: string;
+  refreshFrequency: string;
+  dataStatus: DataFreshnessStatus;
+  lastUpdated: string;
 }
 
 export interface InvestmentScenario {
@@ -127,11 +159,10 @@ export interface MarketBriefReport {
   sourceRegister: string[];
 }
 
-export interface InvestorStrategyInput {
-  budgetAED: number;
-  investmentObjective: 'High Net Yield' | 'Capital Growth' | 'Balanced Portfolio' | 'Golden Visa Eligibility';
-  holdingPeriodYears: number;
-  preferredArea?: string;
-  financingPreference: 'Full Cash' | 'Developer Payment Schedule' | 'Mortgage';
-  riskTolerance: 'Conservative' | 'Moderate' | 'Aggressive';
+export interface SimplifiedInvestorBrief {
+  budgetTier: 'AED 1M' | 'AED 2M' | 'AED 5M' | 'AED 10M+';
+  objective: 'Grow Investment' | 'Generate Rental Income' | 'Balance of Both' | 'Buy Luxury Home';
+  timeline: 'Now' | 'Next 3 months' | '3–6 months' | '6–12 months' | 'Just researching';
+  propertyType: 'Apartment' | 'Villa' | 'Townhouse' | 'Penthouse' | 'Not sure yet';
+  locationPreference: 'Dubai-wide' | 'Waterfront' | 'Downtown / City' | 'Family communities' | 'Emerging areas' | 'Not sure yet';
 }

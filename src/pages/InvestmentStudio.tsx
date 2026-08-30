@@ -22,7 +22,6 @@ export const InvestmentStudio = ({
 
   const [customScenario, setCustomScenario] = useState<InvestmentScenario>(DEFAULT_SCENARIOS.Base);
 
-  // Update custom scenario when preset buttons are clicked
   const handleSelectPreset = (name: 'Conservative' | 'Base' | 'Optimistic') => {
     setScenarioName(name);
     setCustomScenario(DEFAULT_SCENARIOS[name]);
@@ -55,10 +54,10 @@ export const InvestmentStudio = ({
           </div>
           <div>
             <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-white">
-              Dubai Investment Calculator
+              Dubai Investment Studio
             </h1>
             <p className="text-stone-400 text-xs sm:text-sm">
-              Model upfront capital requirements, milestone payments, and estimated 5-year returns.
+              Model upfront capital requirements, milestone payments, and estimated returns based on transparent math.
             </p>
           </div>
         </div>
@@ -217,7 +216,7 @@ export const InvestmentStudio = ({
 
             {/* Disclaimer Note */}
             <div className="p-3 bg-stone-950/60 rounded-lg text-[10px] text-stone-400 border border-stone-800">
-              Disclaimer: All calculations are illustrative estimates based on compounding financial math equations and historical DLD market indices. Projections do not constitute guaranteed investment returns.
+              Disclaimer: Illustrative projection based on compounding financial math equations and historical DLD market indices. Not a guaranteed return.
             </div>
           </div>
 
@@ -228,7 +227,7 @@ export const InvestmentStudio = ({
                 Discuss Your Investment Model with an Advisor
               </h4>
               <p className="text-xs text-stone-500">
-                Send your configured parameters directly to a Senior Advisor on WhatsApp.
+                Send your configured parameters directly to a MITTALCO Senior Advisor on WhatsApp.
               </p>
             </div>
 

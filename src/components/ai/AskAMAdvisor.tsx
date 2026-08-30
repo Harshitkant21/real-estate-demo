@@ -1,42 +1,45 @@
 import { useState } from 'react';
-import type { AIAdvisorResponse, CurrencyCode, ExchangeRates } from '../../types';
+import type { AIAdvisorResponse, SimplifiedInvestorBrief } from '../../types';
 import { aiAdvisorService } from '../../services/aiAdvisorService';
 import { whatsappService } from '../../services/whatsappService';
-import { formatConvertedPrice } from '../../utils/currency';
 import { Sparkles, Bot, ArrowRight, ShieldCheck, AlertCircle, MessageSquare, Building2, RefreshCw } from 'lucide-react';
 
 interface Props {
-  selectedCurrency: CurrencyCode;
-  rates: ExchangeRates;
   onSelectPropertyByName?: (name: string) => void;
 }
 
-export const AskAMAdvisor = ({ selectedCurrency, rates, onSelectPropertyByName }: Props) => {
-  const [prompt, setPrompt] = useState('I have AED 2.5M and want high rental yield with Golden Visa eligibility');
+export const AskAMAdvisor = ({ onSelectPropertyByName }: Props) => {
+  const [briefInput, setBriefInput] = useState<SimplifiedInvestorBrief>({
+    budgetTier: 'AED 2M',
+    objective: 'Balance of Both',
+    timeline: 'Next 3 months',
+    propertyType: 'Apartment',
+    locationPreference: 'Waterfront',
+  });
+
+  const [prompt, setPrompt] = useState('I want a balanced waterfront property with Golden Visa eligibility and steady rental returns.');
   const [budgetAED, setBudgetAED] = useState(2500000);
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState<AIAdvisorResponse | null>(null);
 
-  const formattedBudget = formatConvertedPrice(budgetAED, selectedCurrency, rates);
-
   const handleRunAdvisor = async () => {
     setIsLoading(true);
     try {
-      const res = await aiAdvisorService.queryAdvisor(prompt, budgetAED);
+      const fullPrompt = `${prompt}. Budget Tier: ${briefInput.budgetTier}, Goal: ${briefInput.objective}, Property: ${briefInput.propertyType}, Location: ${briefInput.locationPreference}, Timeline: ${briefInput.timeline}`;
+      const res = await aiAdvisorService.queryAdvisor(fullPrompt, budgetAED, briefInput);
       setResponse(res);
     } catch (err) {
-      console.error('AI Advisor error:', err);
+      console.error('Mittalco Intelligence error:', err);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const whatsappUrl = response
-    ? whatsappService.getGeneralAdvisorUrl()
-    : '#';
+  const whatsappUrl = whatsappService.getGeneralAdvisorUrl();
 
   return (
     <div className="dark-panel rounded-3xl p-6 sm:p-10 space-y-6 border border-stone-800 shadow-2xl">
+      
       {/* Header */}
       <div className="flex items-center justify-between border-b border-stone-800 pb-4">
         <div className="flex items-center gap-3">
@@ -45,69 +48,155 @@ export const AskAMAdvisor = ({ selectedCurrency, rates, onSelectPropertyByName }
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-serif-luxury font-bold text-2xl text-white">Ask AM Intelligence</h3>
+              <h3 className="font-serif-luxury font-bold text-2xl text-white">Mittalco Intelligence Analyst</h3>
               <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-[10px] font-bold border border-amber-500/20">
-                NVIDIA NIM AI Reasoning
+                AI Reasoning Engine
               </span>
             </div>
             <p className="text-xs text-stone-400">
-              Interactive AI advisor analyzing official Dubai Land Department transaction trends.
+              Interactive private wealth advisor analyzing official Dubai Land Department transaction trends.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Input Controls */}
-      <div className="space-y-4 bg-stone-900/90 p-5 rounded-2xl border border-stone-800">
+      {/* Simplified Intuitive Investor Brief Intake Form */}
+      <div className="bg-stone-900/90 p-5 rounded-2xl border border-stone-800 space-y-5">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          
+          {/* Budget Tier */}
+          <div className="space-y-1">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+              Investment Budget
+            </label>
+            <select
+              value={briefInput.budgetTier}
+              onChange={(e) => {
+                const tier = e.target.value as any;
+                setBriefInput({ ...briefInput, budgetTier: tier });
+                if (tier === 'AED 1M') setBudgetAED(1000000);
+                else if (tier === 'AED 2M') setBudgetAED(2500000);
+                else if (tier === 'AED 5M') setBudgetAED(5000000);
+                else setBudgetAED(10000000);
+              }}
+              className="w-full p-2.5 bg-stone-950 border border-stone-700 text-white rounded-xl focus:border-amber-500"
+            >
+              <option value="AED 1M">AED 1,000,000</option>
+              <option value="AED 2M">AED 2,500,000</option>
+              <option value="AED 5M">AED 5,000,000</option>
+              <option value="AED 10M+">AED 10,000,000+</option>
+            </select>
+          </div>
+
+          {/* Investment Objective */}
+          <div className="space-y-1">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+              Investment Goal
+            </label>
+            <select
+              value={briefInput.objective}
+              onChange={(e) => setBriefInput({ ...briefInput, objective: e.target.value as any })}
+              className="w-full p-2.5 bg-stone-950 border border-stone-700 text-white rounded-xl focus:border-amber-500"
+            >
+              <option value="Grow Investment">Capital Growth</option>
+              <option value="Generate Rental Income">Generate Rental Income</option>
+              <option value="Balance of Both">Balance of Both</option>
+              <option value="Buy Luxury Home">Buy Luxury Home That Holds Value</option>
+            </select>
+          </div>
+
+          {/* Property Type */}
+          <div className="space-y-1">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+              Property Type
+            </label>
+            <select
+              value={briefInput.propertyType}
+              onChange={(e) => setBriefInput({ ...briefInput, propertyType: e.target.value as any })}
+              className="w-full p-2.5 bg-stone-950 border border-stone-700 text-white rounded-xl focus:border-amber-500"
+            >
+              <option value="Apartment">Apartment</option>
+              <option value="Villa">Villa</option>
+              <option value="Townhouse">Townhouse</option>
+              <option value="Penthouse">Penthouse</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </div>
+
+          {/* Location Preference */}
+          <div className="space-y-1">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+              Preferred Location
+            </label>
+            <select
+              value={briefInput.locationPreference}
+              onChange={(e) => setBriefInput({ ...briefInput, locationPreference: e.target.value as any })}
+              className="w-full p-2.5 bg-stone-950 border border-stone-700 text-white rounded-xl focus:border-amber-500"
+            >
+              <option value="Waterfront">Waterfront (Palm Jumeirah / Creek)</option>
+              <option value="Downtown / City">Downtown / City Center</option>
+              <option value="Family communities">Family Communities (Dubai Hills)</option>
+              <option value="Emerging areas">Emerging High-Yield Corridors</option>
+              <option value="Dubai-wide">Dubai-wide Opportunities</option>
+            </select>
+          </div>
+
+          {/* Investment Timeline */}
+          <div className="space-y-1 sm:col-span-2 lg:col-span-2">
+            <label className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
+              Investment Timeline
+            </label>
+            <select
+              value={briefInput.timeline}
+              onChange={(e) => setBriefInput({ ...briefInput, timeline: e.target.value as any })}
+              className="w-full p-2.5 bg-stone-950 border border-stone-700 text-white rounded-xl focus:border-amber-500"
+            >
+              <option value="Now">Ready Now</option>
+              <option value="Next 3 months">Next 3 Months</option>
+              <option value="3–6 months">3 to 6 Months</option>
+              <option value="6–12 months">6 to 12 Months</option>
+              <option value="Just researching">Just Researching</option>
+            </select>
+          </div>
+
+        </div>
+
+        {/* Free Text Note */}
         <div>
-          <label className="block text-xs font-semibold text-stone-300 mb-1.5">
-            Describe Your Investment Strategy / Goal
+          <label className="block text-xs font-semibold text-stone-300 mb-1">
+            Additional Strategy Notes (Optional)
           </label>
           <input
             type="text"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="e.g. I have AED 2M for long term rental income in waterfront towers..."
+            placeholder="e.g. Prefer off-plan milestone payment schedule with Golden Visa eligibility..."
             className="w-full p-3 text-xs bg-stone-950 border border-stone-700 text-white rounded-xl focus:outline-none focus:border-amber-500"
           />
         </div>
 
-        <div className="space-y-1">
-          <div className="flex justify-between text-xs text-stone-300 font-semibold">
-            <span>Target Investment Budget:</span>
-            <span className="text-amber-400 font-bold">{formattedBudget.formatted}</span>
-          </div>
-          <input
-            type="range"
-            min={1500000}
-            max={20000000}
-            step={500000}
-            value={budgetAED}
-            onChange={(e) => setBudgetAED(Number(e.target.value))}
-            className="w-full accent-amber-500 cursor-pointer"
-          />
-        </div>
-
+        {/* Submit Action CTA */}
         <button
           onClick={handleRunAdvisor}
           disabled={isLoading}
-          className="w-full py-3 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2"
+          className="w-full py-3.5 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2"
         >
           {isLoading ? (
             <>
               <RefreshCw className="w-4 h-4 animate-spin" />
-              <span>Analyzing DLD Telemetry...</span>
+              <span>Analyzing DLD Telemetry & Strategy...</span>
             </>
           ) : (
             <>
               <Sparkles className="w-4 h-4" />
-              <span>Ask AM Advisor</span>
+              <span>Build My Dubai Investment Brief</span>
             </>
           )}
         </button>
       </div>
 
-      {/* Response Panel */}
+      {/* Response Output Panel */}
       {response && (
         <div className="bg-stone-900 border border-stone-800 rounded-2xl p-6 space-y-5 animate-fadeIn">
           
@@ -116,7 +205,7 @@ export const AskAMAdvisor = ({ selectedCurrency, rates, onSelectPropertyByName }
               <span className="text-[10px] text-amber-400 uppercase font-bold tracking-widest block">
                 {response.marketView}
               </span>
-              <h4 className="font-serif-luxury font-bold text-lg text-white">AI Strategy Analysis</h4>
+              <h4 className="font-serif-luxury font-bold text-lg text-white">Your Tailored Investment Brief</h4>
             </div>
 
             <div className="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg text-center">
@@ -143,7 +232,7 @@ export const AskAMAdvisor = ({ selectedCurrency, rates, onSelectPropertyByName }
 
             <div className="p-3.5 bg-stone-950 rounded-xl border border-stone-800 space-y-2">
               <span className="text-amber-400 font-bold flex items-center gap-1">
-                <AlertCircle className="w-3.5 h-3.5" /> Risk Factors
+                <AlertCircle className="w-3.5 h-3.5" /> Key Considerations & Risks
               </span>
               <ul className="space-y-1 text-stone-300 text-[11px]">
                 {response.risks.map((r, i) => (
@@ -156,7 +245,7 @@ export const AskAMAdvisor = ({ selectedCurrency, rates, onSelectPropertyByName }
           {response.recommendedProperties.length > 0 && (
             <div className="space-y-2 pt-2 border-t border-stone-800">
               <span className="text-[10px] uppercase font-bold text-stone-400 block">
-                Matching AM Estates Dossiers
+                Matching MITTALCO Dossiers
               </span>
               <div className="flex flex-wrap gap-2">
                 {response.recommendedProperties.map((name, i) => (
@@ -187,7 +276,7 @@ export const AskAMAdvisor = ({ selectedCurrency, rates, onSelectPropertyByName }
               className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow transition-colors shrink-0"
             >
               <MessageSquare className="w-4 h-4 fill-current" />
-              <span>Review Strategy with Human Advisor</span>
+              <span>Review Strategy with Mittalco Advisor</span>
             </a>
           </div>
 

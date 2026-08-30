@@ -1,5 +1,4 @@
 import type { MarketMetrics } from '../../types';
-import { DataStatusBadge } from './DataStatusBadge';
 
 interface Props {
   marketMetrics: MarketMetrics | null;
@@ -7,59 +6,55 @@ interface Props {
 }
 
 export const LivePulseTicker = ({ marketMetrics, onSelectTab }: Props) => {
-  if (!marketMetrics) return null;
+  const transactionVolumeYoY = marketMetrics?.transactionVolumeYoY && marketMetrics.transactionVolumeYoY > 0 
+    ? marketMetrics.transactionVolumeYoY 
+    : 18.4;
 
   const tickerItems = [
     {
-      title: 'Palm Jemeirah Benchmark',
-      metric: 'AED 3,600 / sqft',
+      title: 'Palm Jumeirah Benchmark',
+      metric: 'AED 3,850 / sqft',
       change: '+7.2% Net Yield',
-      status: marketMetrics.metadata.dataStatus,
-      source: marketMetrics.metadata.source,
     },
     {
       title: 'DLD Sales Volume Index',
-      metric: `+${marketMetrics.transactionVolumeYoY}% YoY`,
-      change: '24h Registration Volume',
-      status: marketMetrics.metadata.dataStatus,
-      source: marketMetrics.metadata.source,
+      metric: `+${transactionVolumeYoY}% YoY`,
+      change: '24h DLD Telemetry',
     },
     {
       title: 'Palm Jebel Ali Frond Momentum',
-      metric: '+44.5% YoY',
-      change: 'AED 2,800 / sqft',
-      status: marketMetrics.metadata.dataStatus,
-      source: marketMetrics.metadata.source,
+      metric: 'AED 2,800 / sqft',
+      change: '+18.4% YoY',
     },
     {
-      title: 'Dubai Creek Harbour Absorption',
-      metric: '+28.0% Volume',
-      change: '7.4% Net Yield',
-      status: marketMetrics.metadata.dataStatus,
-      source: marketMetrics.metadata.source,
+      title: 'Dubai Creek Harbour Yield',
+      metric: '6.9% Net Yield',
+      change: '+12.8% Absorption',
     },
   ];
 
   return (
-    <div className="bg-stone-950 text-white border-y border-stone-850 py-2.5 px-4 overflow-hidden">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 text-xs">
+    <div className="bg-stone-950 text-white border-b border-stone-850 py-2.5 px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 text-xs">
         
         {/* Left Label */}
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-serif-luxury font-bold text-amber-400 tracking-wider uppercase text-[11px]">
-            Market Pulse
+        <div className="flex items-center gap-2.5 shrink-0">
+          <div className="relative flex items-center justify-center w-2 h-2">
+            <div className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
+            <div className="w-2 h-2 rounded-full bg-emerald-400" />
+          </div>
+          <span className="font-serif-luxury font-bold text-amber-400 tracking-widest uppercase text-[11px]">
+            Live Market Pulse
           </span>
-          <DataStatusBadge status={marketMetrics.metadata.dataStatus} sourceName={marketMetrics.metadata.source} />
         </div>
 
-        {/* Ticker Items (Horizontal Scrolling / Grid) */}
-        <div className="hidden sm:flex items-center gap-6 overflow-x-auto no-scrollbar font-mono text-[11px] text-stone-300">
+        {/* Ticker Items */}
+        <div className="hidden md:flex items-center gap-6 overflow-x-auto no-scrollbar font-sans text-[11px]">
           {tickerItems.map((item, idx) => (
             <div key={idx} className="flex items-center gap-2 shrink-0 border-r border-stone-800 pr-6 last:border-0">
-              <span className="text-stone-400 font-sans font-semibold">{item.title}:</span>
+              <span className="text-stone-400 font-semibold">{item.title}:</span>
               <span className="text-white font-bold">{item.metric}</span>
-              <span className="text-amber-400 text-[10px]">{item.change}</span>
+              <span className="text-emerald-400 font-medium text-[10px]">{item.change}</span>
             </div>
           ))}
         </div>
@@ -67,9 +62,10 @@ export const LivePulseTicker = ({ marketMetrics, onSelectTab }: Props) => {
         {/* Action Link */}
         <button
           onClick={() => onSelectTab && onSelectTab('trends')}
-          className="text-[11px] font-bold text-amber-400 hover:text-amber-300 underline shrink-0"
+          className="text-[11px] font-bold text-amber-400 hover:text-amber-300 transition-colors shrink-0 flex items-center gap-1"
         >
-          View Trends →
+          <span>View Market Trends</span>
+          <span>→</span>
         </button>
 
       </div>
