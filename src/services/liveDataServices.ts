@@ -41,18 +41,31 @@ function extractRealDeveloper(item: any, index: number): string {
 }
 
 /**
+ * Universal fetcher trying proxied route first to bypass CSP/CORS, then direct API fallback.
+ */
+async function fetchPfApi(path: string): Promise<Response> {
+  const headers = {
+    'x-rapidapi-key': RAPIDAPI_KEY,
+    'x-rapidapi-host': RAPIDAPI_HOST,
+    'Content-Type': 'application/json',
+  };
+
+  try {
+    const proxyRes = await fetch(`/api/rapidapi${path}`, { method: 'GET', headers });
+    if (proxyRes.ok) return proxyRes;
+  } catch {
+    // Ignore proxy error and fall back to direct HTTPS
+  }
+
+  return fetch(`https://${RAPIDAPI_HOST}${path}`, { method: 'GET', headers });
+}
+
+/**
  * Fetch Live Properties for Sale from Property Finder API
  */
 export const fetchLiveProperties = async (): Promise<NormalizedRecord<Property[]>> => {
   try {
-    const res = await fetch(`https://${RAPIDAPI_HOST}/search-buy?location_id=1`, {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-key': RAPIDAPI_KEY,
-        'x-rapidapi-host': RAPIDAPI_HOST,
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetchPfApi('/search-buy?location_id=1');
 
     if (res.ok) {
       const json = await res.json();
@@ -154,14 +167,7 @@ export const fetchLiveProperties = async (): Promise<NormalizedRecord<Property[]
  */
 export const fetchLiveLaunches = async (): Promise<NormalizedRecord<Launch[]>> => {
   try {
-    const res = await fetch(`https://${RAPIDAPI_HOST}/search-new-projects?location_id=1`, {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-key': RAPIDAPI_KEY,
-        'x-rapidapi-host': RAPIDAPI_HOST,
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetchPfApi('/search-new-projects?location_id=1');
 
     if (res.ok) {
       const json = await res.json();
@@ -222,14 +228,7 @@ export const fetchLiveLaunches = async (): Promise<NormalizedRecord<Launch[]>> =
  */
 export const fetchLiveDevelopers = async (): Promise<NormalizedRecord<Developer[]>> => {
   try {
-    const res = await fetch(`https://${RAPIDAPI_HOST}/real-estate-developer?location=dubai&page=1`, {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-key': RAPIDAPI_KEY,
-        'x-rapidapi-host': RAPIDAPI_HOST,
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetchPfApi('/real-estate-developer?location=dubai&page=1');
 
     if (res.ok) {
       const json = await res.json();
@@ -280,14 +279,7 @@ export const fetchLiveDevelopers = async (): Promise<NormalizedRecord<Developer[
  */
 export const fetchLiveMarketMetrics = async (): Promise<NormalizedRecord<MarketMetrics | null>> => {
   try {
-    const res = await fetch(`https://${RAPIDAPI_HOST}/property-insight?location_id=1`, {
-      method: 'GET',
-      headers: {
-        'x-rapidapi-key': RAPIDAPI_KEY,
-        'x-rapidapi-host': RAPIDAPI_HOST,
-        'Content-Type': 'application/json',
-      },
-    });
+    const res = await fetchPfApi('/property-insight?location_id=1');
 
     if (res.ok) {
       const json = await res.json();
