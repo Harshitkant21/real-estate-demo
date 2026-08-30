@@ -21,7 +21,7 @@ const DEFAULT_ADVISOR: AdvisorProfile = {
   id: 'adv-001',
   name: APP_CONFIG.advisor.name,
   title: APP_CONFIG.advisor.title,
-  reraLicenseNo: APP_CONFIG.advisor.reraLicense,
+  networkAffiliation: APP_CONFIG.advisor.networkAffiliation,
   brokeragePartner: APP_CONFIG.companyDetails.legalName,
   experienceYears: 12,
   officeAddress: APP_CONFIG.companyDetails.officeAddress,
@@ -35,7 +35,7 @@ const DEFAULT_ADVISOR: AdvisorProfile = {
     'Golden Visa Equity Portfolio Structuring',
     'ROI & Net Rental Yield Optimization',
   ],
-  languages: ['English', 'Arabic', 'French'],
+  languages: ['English', 'Hindi', 'Punjabi'],
 };
 
 
@@ -114,10 +114,10 @@ export const AdvisorDesk = () => {
 
           <div className="space-y-3 text-xs">
             <div className="p-3.5 bg-stone-50 border border-stone-200 rounded-xl space-y-1 font-mono">
-              <span className="text-[10px] text-stone-500 uppercase font-bold block">Regulatory Credentials</span>
+              <span className="text-[10px] text-stone-500 uppercase font-bold block">Professional Network</span>
               <p className="font-bold text-stone-900 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-700" />
-                {advisor.reraLicenseNo}
+                {advisor.networkAffiliation}
               </p>
               <p className="text-stone-600">{advisor.brokeragePartner}</p>
             </div>
@@ -208,8 +208,9 @@ export const AdvisorDesk = () => {
               Confidential Private Wealth Advisory Standard
             </span>
             <p className="text-amber-800/90 text-[11px]">
-              All client consultations and portfolio inquiries are handled under strict confidentiality protocols compliant with Dubai Real Estate Regulatory Authority (RERA) standards.
+              All client consultations and portfolio inquiries are handled under strict confidentiality protocols compliant with Dubai Land Department (DLD) standards.
             </p>
+
           </div>
         </div>
 

@@ -4,7 +4,7 @@ export const AdvisorProfileSchema = z.object({
   id: z.string(),
   name: z.string(),
   title: z.string(),
-  reraLicenseNo: z.string(),
+  networkAffiliation: z.string(),
   brokeragePartner: z.string(),
   experienceYears: z.number().positive(),
   specialization: z.array(z.string()),

@@ -335,8 +335,9 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
 
 
               <p className="text-[10px] text-stone-400 italic">
-                No sensitive financial credentials stored locally. Confidential advisory guaranteed under UAE RERA standards.
+                No sensitive financial credentials stored locally. Confidential advisory guaranteed under DLD & UAE regulatory standards.
               </p>
+
             </div>
           )}
         </div>

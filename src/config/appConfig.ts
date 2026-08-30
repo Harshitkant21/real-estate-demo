@@ -10,7 +10,7 @@ export interface AppConfig {
   advisor: {
     name: string;
     title: string;
-    reraLicense: string;
+    networkAffiliation: string;
     whatsApp: string;
     photoUrl: string;
   };
@@ -33,16 +33,15 @@ export const APP_CONFIG: AppConfig = {
   companyDetails: {
     legalName: 'MITTAL & CO. Real Estate Advisory LLC',
     officeAddress: 'Level 28, Boulevard Plaza Tower 1, Downtown Dubai, UAE',
-    email: import.meta.env.VITE_ADVISOR_EMAIL || 'advisory@mittalco.com',
-
+    email: import.meta.env.VITE_ADVISOR_EMAIL || 'mittalanmol422@mittalco.org',
     phone: '+971 4 123 4567',
   },
   advisor: {
-    name: 'Alexander Wright',
+    name: 'Anmol Mittal',
     title: 'Senior Dubai Real Estate & Private Wealth Advisor',
-    reraLicense: 'RERA Broker License #39281',
+    networkAffiliation: 'LICENSED BROKERAGE PARTNER NETWORK',
     whatsApp: rawWhatsapp,
-    photoUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
+    photoUrl: 'src/assets/advisory_img.jpeg',
   },
   aiProvider: import.meta.env.VITE_AI_PROVIDER || 'nvidia',
   aiModel: import.meta.env.VITE_AI_MODEL || 'meta/llama-3.1-8b-instruct',

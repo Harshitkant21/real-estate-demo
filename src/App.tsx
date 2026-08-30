@@ -395,7 +395,7 @@ export function App() {
                 Regulatory Advisory
               </span>
               <div className="space-y-1 text-stone-400 text-[11px]">
-                <p className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> RERA Broker License #39281</p>
+                <p className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> LICENSED BROKERAGE PARTNER NETWORK</p>
                 <p>Dubai Land Department (DLD) Telemetry</p>
                 <p>Zero Fake Live Data Provenance Guarantee</p>
               </div>
@@ -405,7 +405,7 @@ export function App() {
           <div className="text-[10px] text-stone-400 space-y-2 leading-normal">
             <p className="font-semibold text-stone-400 font-serif-luxury text-xs">Data Provenance & Compliance Notice:</p>
             <p>
-              Property information, yields, handover dates, and ROI projections are provided for general informational purposes and modeling only. All claims regarding 0% property tax, UAE Golden Visa 10-year residency, RERA escrow protections, and capital appreciation are subject to applicable UAE government regulations, DLD eligibility requirements, individual financial circumstances, and final legal approval. Projections are estimates and do not constitute guaranteed returns.
+              Property information, yields, handover dates, and ROI projections are provided for general informational purposes and modeling only. All claims regarding 0% property tax, UAE Golden Visa 10-year residency, registered DLD escrow protections, and capital appreciation are subject to applicable UAE government regulations, DLD eligibility requirements, individual financial circumstances, and final legal approval. Projections are estimates and do not constitute guaranteed returns.
             </p>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2 border-t border-stone-850 text-stone-400">
               <span>© 2026 MITTAL & CO. All rights reserved.</span>
