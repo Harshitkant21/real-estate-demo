@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const nvidiaKey = env.NVIDIA_API_KEY || env.VITE_NVIDIA_API_KEY || '';
-  const rapidApiKey = env.VITE_RAPIDAPI_KEY || 'ff9f154ff7mshb33b5ec7b83ff57p19fcf7jsn03939c2dff8c';
+  const rapidApiKey = env.VITE_RAPIDAPI_KEY || '';
 
   return {
     plugins: [react(), tailwindcss()],
@@ -18,8 +18,10 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/api\/rapidapi/, ''),
           configure: (proxy) => {
             proxy.on('proxyReq', (proxyReq) => {
-              proxyReq.setHeader('x-rapidapi-key', rapidApiKey);
-              proxyReq.setHeader('x-rapidapi-host', 'property-finder6.p.rapidapi.com');
+              if (rapidApiKey) {
+                proxyReq.setHeader('x-rapidapi-key', rapidApiKey);
+                proxyReq.setHeader('x-rapidapi-host', 'property-finder6.p.rapidapi.com');
+              }
             });
           },
         },

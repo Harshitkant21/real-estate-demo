@@ -2,7 +2,8 @@ import type { Property, Developer, Launch, NewsItem, MarketMetrics, NormalizedRe
 import { DATA_SOURCE_REGISTRY } from '../config/dataSources';
 import { currencyService } from './currencyApi';
 
-const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY || 'ff9f154ff7mshb33b5ec7b83ff57p19fcf7jsn03939c2dff8c';
+const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY || '';
+
 const RAPIDAPI_HOST = import.meta.env.VITE_RAPIDAPI_HOST || 'property-finder6.p.rapidapi.com';
 
 const KNOWN_DEVELOPERS = [

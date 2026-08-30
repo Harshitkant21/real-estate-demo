@@ -1,4 +1,14 @@
 {
+  "rewrites": [
+    {
+      "source": "/api/rapidapi/:path*",
+      "destination": "https://property-finder6.p.rapidapi.com/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
