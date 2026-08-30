@@ -46,15 +46,15 @@ export const Header = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 sm:h-24 lg:h-28 gap-6">
           
-          {/* MITTALCO Brand Identity */}
+          {/* MITTAL & CO. Brand Identity */}
           <div
             onClick={() => onSelectTab('home')}
-            className="flex items-center cursor-pointer group shrink-0 py-2"
+            className="flex items-center cursor-pointer shrink-0 py-2"
           >
             <img
-              src="/assets/logo.png"
-              alt="MITTAL & CO. STRATEGIC ADVISOR"
-              className="h-14 sm:h-18 lg:h-22 w-auto object-contain mix-blend-multiply transition-transform group-hover:scale-105"
+              src="https://res.cloudinary.com/j7klg679/image/upload/v1788087818/PHOTO-2026-08-30-15-03-26.jpg"
+              alt="MITTAL & CO."
+              className="h-12 sm:h-14 lg:h-16 w-auto object-contain mix-blend-multiply"
             />
           </div>
 

@@ -365,9 +365,9 @@ export function App() {
             <div className="space-y-3 md:col-span-2">
               <div className="flex items-center gap-3">
                 <img
-                  src="/assets/logo.png"
-                  alt="MITTAL & CO. STRATEGIC ADVISOR"
-                  className="h-16 sm:h-20 w-auto object-contain bg-white/95 p-2 rounded-xl shadow-md"
+                  src="https://res.cloudinary.com/j7klg679/image/upload/v1788087818/PHOTO-2026-08-30-15-03-26.jpg"
+                  alt="MITTAL & CO."
+                  className="h-14 sm:h-16 w-auto object-contain rounded-lg"
                 />
               </div>
 

@@ -4,7 +4,8 @@ import type { EOIForm, ConsultationBooking } from '../types';
 export class LeadCommunicationService {
   public getAdvisorNumber(): string {
     const envNum = import.meta.env.VITE_ADVISOR_WHATSAPP;
-    let raw = (envNum || APP_CONFIG.advisor.whatsApp || '971501234567').toString().trim();
+    let raw = (envNum || APP_CONFIG.advisor.whatsApp || '971582827196').toString().trim();
+
 
     let digits = raw.replace(/\D/g, '').replace(/^0+/, '');
 

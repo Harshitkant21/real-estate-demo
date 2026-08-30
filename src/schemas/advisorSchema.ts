@@ -29,7 +29,8 @@ export const ConsultationBookingSchema = z.object({
   phone: z
     .string()
     .min(7, 'Mobile or WhatsApp number is required (at least 7 digits)')
-    .regex(/^\+?[0-9\s\-()]{7,20}$/, 'Please enter a valid phone number (digits only, e.g. +971501234567)'),
+    .regex(/^\+?[0-9\s\-()]{7,20}$/, 'Please enter a valid phone number (digits only, e.g. +971582827196)'),
+
   country: z.string().min(2, 'Country of residence is required'),
   targetBudgetAED: z.number().positive(),
   preferredChannel: z.enum(['WhatsApp', 'Video Call', 'In-Person Meeting']),

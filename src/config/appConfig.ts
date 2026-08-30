@@ -25,16 +25,17 @@ export interface AppConfig {
   rateCacheDurationMs: number;
 }
 
-const rawWhatsapp = (import.meta.env.VITE_ADVISOR_WHATSAPP || '971501234567').toString().replace(/\D/g, '');
+const rawWhatsapp = (import.meta.env.VITE_ADVISOR_WHATSAPP || '971582827196').toString().replace(/\D/g, '');
 
 export const APP_CONFIG: AppConfig = {
   appName: 'MITTAL & CO.',
   tagline: 'Dubai real estate, intelligently invested.',
   companyDetails: {
     legalName: 'MITTAL & CO. Real Estate Advisory LLC',
-    officeAddress: 'Level 28, Boulevard Plaza Tower 1, Downtown Dubai, UAE',
+    officeAddress: 'Dubai, UAE',
+
     email: import.meta.env.VITE_ADVISOR_EMAIL || 'mittalanmol422@mittalco.org',
-    phone: '+971 4 123 4567',
+    phone: '+971 58 282 7196',
   },
   advisor: {
     name: 'Anmol Mittal',
