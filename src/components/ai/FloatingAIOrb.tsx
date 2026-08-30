@@ -39,17 +39,17 @@ export const FloatingAIOrb = ({ properties, onSelectProperty }: Props) => {
       {/* Floating Orb Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 group flex items-center gap-3 px-4 py-3.5 bg-stone-950 text-white rounded-full shadow-2xl border border-amber-500/40 hover:border-amber-400 hover:scale-105 transition-all duration-300"
+        className="fixed bottom-20 right-3 sm:bottom-20 sm:right-6 xl:bottom-6 xl:right-6 z-40 group flex items-center gap-2.5 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3.5 bg-stone-950/95 backdrop-blur-md text-white rounded-full shadow-2xl border border-amber-500/40 hover:border-amber-400 hover:scale-105 transition-all duration-300"
         title="Open MITTAL & CO. Intelligence Analyst"
       >
-        <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/20 text-amber-400">
+        <div className="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-amber-500/20 text-amber-400 shrink-0">
           <div className="absolute inset-0 rounded-full border border-amber-400/60 animate-ping opacity-30" />
-          <Sparkles className="w-4 h-4 text-amber-400" />
+          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
         </div>
 
         <div className="text-left font-serif-luxury tracking-wide">
-          <span className="text-xs font-bold text-amber-400 block leading-none">MITTAL & CO. AI</span>
-          <span className="text-[9px] text-stone-300 uppercase tracking-widest font-sans font-bold">
+          <span className="text-[11px] sm:text-xs font-bold text-amber-400 block leading-none">MITTAL & CO. AI</span>
+          <span className="text-[8px] sm:text-[9px] text-stone-300 uppercase tracking-widest font-sans font-bold">
             Private Wealth Desk
           </span>
         </div>

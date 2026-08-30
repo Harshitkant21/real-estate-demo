@@ -149,26 +149,26 @@ export const Home = ({
       )}
 
       {/* SECTION 4: Derived Market Sentiment Engine Card */}
-      <section className="dark-panel rounded-3xl p-6 sm:p-10 space-y-6 border border-stone-800 shadow-xl">
-        <div className="flex items-center justify-between border-b border-stone-800 pb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20">
+      <section className="dark-panel rounded-3xl p-5 sm:p-10 space-y-6 border border-stone-800 shadow-xl">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-stone-800 pb-4">
+          <div className="flex items-start sm:items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20 shrink-0 mt-0.5 sm:mt-0">
               <TrendingUp className="w-5 h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="font-serif-luxury font-bold text-2xl text-white">Dubai Market Sentiment</h2>
-                <DataStatusBadge status={sentiment.dataStatus} sourceName="MITTALCO Engine" />
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="font-serif-luxury font-bold text-xl sm:text-2xl text-white">Dubai Market Sentiment</h2>
+                <DataStatusBadge status={sentiment.dataStatus} sourceName="MITTAL & CO. Engine" />
               </div>
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-stone-400 leading-relaxed font-light">
                 Transparent derived score calculated deterministically from DLD volume momentum, rental yields, and news telemetry.
               </p>
             </div>
           </div>
 
-          <div className="px-4 py-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-xl text-center">
+          <div className="w-full sm:w-auto px-4 py-2.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-xl text-center shrink-0">
             <span className="text-[9px] uppercase font-bold text-stone-400 block">Current Stance</span>
-            <span className="text-xl font-bold">{sentiment.score} / 100 ({sentiment.label})</span>
+            <span className="text-base sm:text-xl font-bold">{sentiment.score} / 100 ({sentiment.label})</span>
           </div>
         </div>
 

@@ -92,19 +92,18 @@ export const MarketIntelligence = ({
       </div>
 
       {/* Market Sentiment Engine Section */}
-      <section className="bg-stone-950 text-white rounded-2xl p-6 sm:p-8 space-y-6 border border-stone-850 shadow-xl">
-        <div className="flex items-center justify-between border-b border-stone-850 pb-4">
-          <div>
+      <section className="bg-stone-950 text-white rounded-2xl p-5 sm:p-8 space-y-6 border border-stone-850 shadow-xl">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-stone-850 pb-4">
+          <div className="space-y-1">
             <span className="text-[10px] text-amber-400 font-bold uppercase tracking-widest block">
               Market Sentiment Engine
             </span>
-            <h2 className="font-serif-luxury font-bold text-2xl text-white">
+            <h2 className="font-serif-luxury font-bold text-xl sm:text-2xl text-white">
               Current Dubai Stance: {sentiment.score} / 100 ({sentiment.label})
             </h2>
           </div>
 
           <DataStatusBadge status={sentiment.dataStatus} sourceName="MITTAL & CO. Derived Scoring Engine" />
-
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
