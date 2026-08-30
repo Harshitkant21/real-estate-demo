@@ -3,7 +3,8 @@ import type { Property, CurrencyCode, ExchangeRates, EOIForm } from '../../types
 import { EOIFormSchema } from '../../schemas/formSchema';
 import { formatConvertedPrice } from '../../utils/currency';
 import { whatsappService } from '../../services/whatsappService';
-import { X, CheckCircle2, ShieldCheck, ArrowRight, MessageSquare, Building2, AlertCircle } from 'lucide-react';
+import { X, CheckCircle2, ShieldCheck, ArrowRight, MessageSquare, Building2, AlertCircle, Mail } from 'lucide-react';
+
 
 interface Props {
   property: Property;
@@ -141,14 +142,19 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                   type="text"
                   placeholder="e.g. Alexander Wright"
                   value={formData.investorName}
-                  onChange={(e) => setFormData({ ...formData, investorName: e.target.value })}
-                  className={`w-full p-2.5 text-xs border rounded-lg focus:outline-none bg-stone-50 ${
-                    formErrors.investorName ? 'border-red-500 bg-red-50/50' : 'border-stone-200 focus:border-amber-700'
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setFormData({ ...formData, investorName: val });
+                    const res = EOIFormSchema.shape.investorName.safeParse(val);
+                    setFormErrors((prev) => ({ ...prev, investorName: res.success ? '' : res.error.issues[0].message }));
+                  }}
+                  className={`w-full p-2.5 text-xs border rounded-lg focus:outline-none bg-stone-50 transition-colors ${
+                    formErrors.investorName ? 'border-red-500 bg-red-50/50 focus:border-red-600' : 'border-stone-200 focus:border-amber-700'
                   }`}
                 />
                 {formErrors.investorName && (
-                  <span className="text-[10px] text-red-600 flex items-center gap-1 mt-1">
-                    <AlertCircle className="w-3 h-3" /> {formErrors.investorName}
+                  <span className="text-[10px] text-red-600 font-semibold flex items-center gap-1 mt-1">
+                    <AlertCircle className="w-3 h-3 text-red-600 shrink-0" /> {formErrors.investorName}
                   </span>
                 )}
               </div>
@@ -160,14 +166,19 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                     type="email"
                     placeholder="investor@domain.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className={`w-full p-2.5 text-xs border rounded-lg focus:outline-none bg-stone-50 ${
-                      formErrors.email ? 'border-red-500 bg-red-50/50' : 'border-stone-200 focus:border-amber-700'
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setFormData({ ...formData, email: val });
+                      const res = EOIFormSchema.shape.email.safeParse(val);
+                      setFormErrors((prev) => ({ ...prev, email: res.success ? '' : res.error.issues[0].message }));
+                    }}
+                    className={`w-full p-2.5 text-xs border rounded-lg focus:outline-none bg-stone-50 transition-colors ${
+                      formErrors.email ? 'border-red-500 bg-red-50/50 focus:border-red-600' : 'border-stone-200 focus:border-amber-700'
                     }`}
                   />
                   {formErrors.email && (
-                    <span className="text-[10px] text-red-600 flex items-center gap-1 mt-1">
-                      <AlertCircle className="w-3 h-3" /> {formErrors.email}
+                    <span className="text-[10px] text-red-600 font-semibold flex items-center gap-1 mt-1">
+                      <AlertCircle className="w-3 h-3 text-red-600 shrink-0" /> {formErrors.email}
                     </span>
                   )}
                 </div>
@@ -176,16 +187,27 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                   <label className="block text-xs font-semibold text-stone-700 mb-1">Mobile / WhatsApp *</label>
                   <input
                     type="tel"
+                    maxLength={15}
                     placeholder="+971 50 000 0000"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className={`w-full p-2.5 text-xs border rounded-lg focus:outline-none bg-stone-50 ${
-                      formErrors.phone ? 'border-red-500 bg-red-50/50' : 'border-stone-200 focus:border-amber-700'
+                    onKeyDown={(e) => {
+                      if (/^[a-zA-Z]$/.test(e.key)) {
+                        e.preventDefault();
+                      }
+                    }}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/[^0-9+\s-]/g, '').slice(0, 15);
+                      setFormData({ ...formData, phone: val });
+                      const res = EOIFormSchema.shape.phone.safeParse(val);
+                      setFormErrors((prev) => ({ ...prev, phone: res.success ? '' : res.error.issues[0].message }));
+                    }}
+                    className={`w-full p-2.5 text-xs border rounded-lg focus:outline-none bg-stone-50 transition-colors ${
+                      formErrors.phone ? 'border-red-500 bg-red-50/50 focus:border-red-600' : 'border-stone-200 focus:border-amber-700'
                     }`}
                   />
                   {formErrors.phone && (
-                    <span className="text-[10px] text-red-600 flex items-center gap-1 mt-1">
-                      <AlertCircle className="w-3 h-3" /> {formErrors.phone}
+                    <span className="text-[10px] text-red-600 font-semibold flex items-center gap-1 mt-1">
+                      <AlertCircle className="w-3 h-3 text-red-600 shrink-0" /> {formErrors.phone}
                     </span>
                   )}
                 </div>
@@ -257,16 +279,60 @@ export const EOIModal = ({ property, selectedCurrency, rates, onClose }: Props) 
                 <p><strong>Target Budget:</strong> {formatted}</p>
               </div>
 
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={onClose}
-                className="w-full py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-md transition-colors"
-              >
-                <MessageSquare className="w-4 h-4 fill-current" />
-                <span>Continue to Advisor on WhatsApp</span>
-              </a>
+              {/* Multi-Channel Dispatch Buttons */}
+              <div className="space-y-2 pt-1">
+                <span className="text-[10px] font-bold text-stone-500 uppercase tracking-wider block text-center">
+                  Choose Your Preferred Communication Channel
+                </span>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
+                  >
+                    <MessageSquare className="w-4 h-4 fill-current" />
+                    <span>Send via WhatsApp</span>
+                  </a>
+
+                  <a
+                    href={whatsappService.getEoiGmailWebUrl(formData, formatted)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="py-2.5 px-3 bg-red-700 hover:bg-red-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>Open Gmail Web</span>
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                  <a
+                    href={whatsappService.getEoiEmailUrl(formData, formatted)}
+                    onClick={onClose}
+                    className="py-2 px-3 bg-stone-900 hover:bg-stone-800 text-stone-200 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-800 transition-colors text-center"
+                  >
+                    <span>Desktop Mail App (mailto)</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const textToCopy = `EOI Submission for ${formData.propertyName}\nInvestor: ${formData.investorName} (${formData.country})\nEmail: ${formData.email}\nPhone: ${formData.phone}\nPreference: ${formData.financingPreference}\nBudget: ${formatted}`;
+                      navigator.clipboard.writeText(textToCopy);
+                      alert('EOI Summary copied to clipboard!');
+                    }}
+                    className="py-2 px-3 bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-200 transition-colors"
+                  >
+                    <span>Copy Summary to Clipboard</span>
+                  </button>
+                </div>
+              </div>
+
+
 
               <p className="text-[10px] text-stone-400 italic">
                 No sensitive financial credentials stored locally. Confidential advisory guaranteed under UAE RERA standards.

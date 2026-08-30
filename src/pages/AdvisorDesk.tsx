@@ -232,22 +232,76 @@ export const AdvisorDesk = () => {
 
             <div className="p-6">
               {isSubmitted ? (
-                <div className="text-center space-y-4 py-4">
-                  <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                  <h4 className="font-serif-luxury font-bold text-xl text-stone-900">Consultation Request Prepared</h4>
-                  <p className="text-xs text-stone-600">
-                    Your request for Alexander Wright has been generated. Continue directly on WhatsApp to confirm timing.
-                  </p>
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsModalOpen(false)}
-                    className="w-full py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow"
-                  >
-                    <MessageSquare className="w-4 h-4 fill-current" />
-                    <span>Confirm Consultation on WhatsApp</span>
-                  </a>
+                <div className="space-y-4 py-2 text-xs">
+                  <div className="text-center space-y-2">
+                    <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
+                    <h4 className="font-serif-luxury font-bold text-xl text-stone-900">Consultation Request Prepared</h4>
+                    <p className="text-xs text-stone-600">
+                      Select your preferred channel below to send your booking request directly to Senior Advisor Alexander Wright.
+                    </p>
+                  </div>
+
+                  {/* Summary Card */}
+                  <div className="p-3.5 bg-stone-50 border border-stone-200 rounded-xl space-y-1 font-mono text-[11px] text-stone-800">
+                    <p><strong>Investor:</strong> {formData.investorName}</p>
+                    <p><strong>Email:</strong> {formData.email}</p>
+                    <p><strong>Mobile:</strong> {formData.phone}</p>
+                    <p><strong>Topic:</strong> {formData.consultationTopic}</p>
+                    <p><strong>Target Advisor:</strong> Alexander Wright ({APP_CONFIG.companyDetails.email})</p>
+                  </div>
+
+                  {/* Multi-Channel Dispatch Buttons */}
+                  <div className="space-y-2 pt-1">
+                    <span className="text-[10px] font-bold text-stone-500 uppercase tracking-wider block text-center">
+                      Choose Your Preferred Channel Below
+                    </span>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <a
+                        href={whatsappService.getConsultationWhatsAppUrl(formData)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsModalOpen(false)}
+                        className="py-2.5 px-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
+                      >
+                        <MessageSquare className="w-4 h-4 fill-current" />
+                        <span>Send via WhatsApp</span>
+                      </a>
+
+                      <a
+                        href={whatsappService.getConsultationGmailWebUrl(formData)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsModalOpen(false)}
+                        className="py-2.5 px-3 bg-red-700 hover:bg-red-800 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors"
+                      >
+                        <Mail className="w-4 h-4" />
+                        <span>Open Gmail Web</span>
+                      </a>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                      <a
+                        href={whatsappService.getConsultationEmailUrl(formData)}
+                        onClick={() => setIsModalOpen(false)}
+                        className="py-2 px-3 bg-stone-900 hover:bg-stone-800 text-stone-200 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-800 transition-colors"
+                      >
+                        <span>Desktop Mail App (mailto)</span>
+                      </a>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const textToCopy = `Advisor: Alexander Wright (${APP_CONFIG.companyDetails.email})\nInvestor: ${formData.investorName}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nTopic: ${formData.consultationTopic}`;
+                          navigator.clipboard.writeText(textToCopy);
+                          alert('Consultation request details copied to clipboard!');
+                        }}
+                        className="py-2 px-3 bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-[11px] rounded-xl flex items-center justify-center gap-1.5 border border-stone-200 transition-colors"
+                      >
+                        <span>Copy Summary to Clipboard</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleBookConsultation} className="space-y-4 text-xs">
@@ -257,29 +311,47 @@ export const AdvisorDesk = () => {
                       type="text"
                       placeholder="Alexander Wright"
                       value={formData.investorName}
-                      onChange={(e) => setFormData({ ...formData, investorName: e.target.value })}
-                      className="w-full p-2.5 border border-stone-200 rounded-lg bg-stone-50"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setFormData({ ...formData, investorName: val });
+                        if (errors.investorName) {
+                          const res = ConsultationBookingSchema.shape.investorName.safeParse(val);
+                          setErrors((prev) => ({ ...prev, investorName: res.success ? '' : res.error.issues[0].message }));
+                        }
+                      }}
+                      className={`w-full p-2.5 border rounded-lg bg-stone-50 focus:outline-none transition-colors ${
+                        errors.investorName ? 'border-red-500 bg-red-50/50 focus:border-red-600' : 'border-stone-200 focus:border-amber-600'
+                      }`}
                     />
                     {errors.investorName && (
-                      <span className="text-[10px] text-red-600 flex items-center gap-1 mt-1">
-                        <AlertCircle className="w-3 h-3" /> {errors.investorName}
+                      <span className="text-[10px] text-red-600 font-semibold flex items-center gap-1 mt-1">
+                        <AlertCircle className="w-3 h-3 shrink-0 text-red-600" /> {errors.investorName}
                       </span>
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block font-semibold text-stone-700 mb-1">Email Address *</label>
                       <input
                         type="email"
                         placeholder="investor@domain.com"
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full p-2.5 border border-stone-200 rounded-lg bg-stone-50"
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setFormData({ ...formData, email: val });
+                          if (errors.email) {
+                            const res = ConsultationBookingSchema.shape.email.safeParse(val);
+                            setErrors((prev) => ({ ...prev, email: res.success ? '' : res.error.issues[0].message }));
+                          }
+                        }}
+                        className={`w-full p-2.5 border rounded-lg bg-stone-50 focus:outline-none transition-colors ${
+                          errors.email ? 'border-red-500 bg-red-50/50 focus:border-red-600' : 'border-stone-200 focus:border-amber-600'
+                        }`}
                       />
                       {errors.email && (
-                        <span className="text-[10px] text-red-600 flex items-center gap-1 mt-1">
-                          <AlertCircle className="w-3 h-3" /> {errors.email}
+                        <span className="text-[10px] text-red-600 font-semibold flex items-center gap-1 mt-1">
+                          <AlertCircle className="w-3 h-3 shrink-0 text-red-600" /> {errors.email}
                         </span>
                       )}
                     </div>
@@ -288,14 +360,27 @@ export const AdvisorDesk = () => {
                       <label className="block font-semibold text-stone-700 mb-1">Mobile / WhatsApp *</label>
                       <input
                         type="tel"
+                        maxLength={15}
                         placeholder="+971 50 000 0000"
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full p-2.5 border border-stone-200 rounded-lg bg-stone-50"
+                        onKeyDown={(e) => {
+                          if (/^[a-zA-Z]$/.test(e.key)) {
+                            e.preventDefault();
+                          }
+                        }}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/[^0-9+\s-]/g, '').slice(0, 15);
+                          setFormData({ ...formData, phone: val });
+                          const res = ConsultationBookingSchema.shape.phone.safeParse(val);
+                          setErrors((prev) => ({ ...prev, phone: res.success ? '' : res.error.issues[0].message }));
+                        }}
+                        className={`w-full p-2.5 border rounded-lg bg-stone-50 focus:outline-none transition-colors ${
+                          errors.phone ? 'border-red-500 bg-red-50/50 focus:border-red-600' : 'border-stone-200 focus:border-amber-600'
+                        }`}
                       />
                       {errors.phone && (
-                        <span className="text-[10px] text-red-600 flex items-center gap-1 mt-1">
-                          <AlertCircle className="w-3 h-3" /> {errors.phone}
+                        <span className="text-[10px] text-red-600 font-semibold flex items-center gap-1 mt-1">
+                          <AlertCircle className="w-3 h-3 shrink-0 text-red-600" /> {errors.phone}
                         </span>
                       )}
                     </div>
@@ -307,14 +392,28 @@ export const AdvisorDesk = () => {
                       type="text"
                       placeholder="e.g. Palm Jebel Ali Villa Allocation"
                       value={formData.consultationTopic}
-                      onChange={(e) => setFormData({ ...formData, consultationTopic: e.target.value })}
-                      className="w-full p-2.5 border border-stone-200 rounded-lg bg-stone-50"
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setFormData({ ...formData, consultationTopic: val });
+                        if (errors.consultationTopic) {
+                          const res = ConsultationBookingSchema.shape.consultationTopic.safeParse(val);
+                          setErrors((prev) => ({ ...prev, consultationTopic: res.success ? '' : res.error.issues[0].message }));
+                        }
+                      }}
+                      className={`w-full p-2.5 border rounded-lg bg-stone-50 focus:outline-none transition-colors ${
+                        errors.consultationTopic ? 'border-red-500 bg-red-50/50 focus:border-red-600' : 'border-stone-200 focus:border-amber-600'
+                      }`}
                     />
+                    {errors.consultationTopic && (
+                      <span className="text-[10px] text-red-600 font-semibold flex items-center gap-1 mt-1">
+                        <AlertCircle className="w-3 h-3 shrink-0 text-red-600" /> {errors.consultationTopic}
+                      </span>
+                    )}
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3 bg-stone-900 text-amber-400 font-bold text-xs rounded-xl hover:bg-stone-800 transition-colors mt-2"
+                    className="w-full py-3 bg-stone-900 text-amber-400 font-bold text-xs rounded-xl hover:bg-stone-800 transition-colors mt-2 shadow-sm"
                   >
                     Validate & Confirm Booking Request
                   </button>

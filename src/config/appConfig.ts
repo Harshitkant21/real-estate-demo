@@ -33,7 +33,8 @@ export const APP_CONFIG: AppConfig = {
   companyDetails: {
     legalName: 'MITTAL & CO. Real Estate Advisory LLC',
     officeAddress: 'Level 28, Boulevard Plaza Tower 1, Downtown Dubai, UAE',
-    email: 'advisory@mittalco.com',
+    email: import.meta.env.VITE_ADVISOR_EMAIL || 'advisory@mittalco.com',
+
     phone: '+971 4 123 4567',
   },
   advisor: {
